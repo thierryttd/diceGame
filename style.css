@@ -1,0 +1,154 @@
+.darkMode{
+    background-color: rgba(22, 20, 20);
+    color: grey;
+}
+body{
+    font-family:Lato;
+    /* font-family: Indie Flower; */
+}
+
+h1{
+    font-size: 1.5em;
+}
+#buttonBar{
+    height: 10vh;
+    /* background-color: darkblue; */
+}
+#playerOneAvatarList {
+    height:10vh;
+    overflow:auto;
+    padding: 0.3vw;
+}
+
+/* #playerOneName{
+    display: flex;
+    flex:wrap;
+} */
+
+/* button{
+    padding: 00.5vw;
+} */
+
+#playerOne{
+    background-color: #0b6c49;
+}
+
+#playerOneGlobalScore, #playerTwoGlobalScore{
+    background-color: red;
+    font-size: 1.3em;
+    margin-top: .5vw;
+    margin-bottom: .5vw;
+
+}
+
+#playerOneCurrentScore, #playerTwoCurrentScore{
+    background-color: #0b6c49;
+    font-size: 1.3em;
+    margin-top: .5vw;
+    margin-bottom: .5vw;
+}
+#dice{
+    height: 336px;
+    /* multiple de 84 hauteur du de */
+}
+
+.diceTrack{
+    /* background-image: url("images/diceTrack.png");
+    background-repeat: no-repeat; */
+    background-color:#0b6c49;
+    height: 420px;
+}
+
+.diceRoll{
+    animation: .8s roll;
+    width: 60px;
+    height: 60px;
+    border-radius: 35px;
+}
+
+.diceRollSmall{
+    animation: .8s rollSmall;
+    width: 60px;
+    height: 60px;
+    border-radius: 35px;
+}
+
+#spinDice{
+    animation: .8s infinite alternate spin;
+    /* width: 60px;
+    height: 60px; */
+    border-radius: 35px;
+    padding: 0.3vw;
+}
+
+@keyframes roll {
+    0% {
+        transform: translateX(0px);
+    }
+    25% {
+        transform: translateX(50px) translateY(336px) rotate(360deg);
+     }
+    50% {
+        transform: translateX(484px) translateY(200px) rotate(360deg);
+     }
+    75% {
+        transform: translateX(250px) translateY(15px) rotate(360deg);
+    }
+    100% {
+        transform: translateX(0px) translateY(0px) rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: translateX(0px);
+    }
+   
+    100% {
+        transform: translateX(2px) rotate(360deg);
+    }
+}
+
+@keyframes rollSmall {
+    0% {
+        transform: translateX(0px);
+    }
+    25% {
+        transform: translateX(50px) translateY(200px) rotate(360deg);
+     }
+    50% {
+        transform: translateX(250px) translateY(150px) rotate(360deg);
+     }
+    75% {
+        transform: translateX(250px) translateY(15px) rotate(360deg);
+    }
+    100% {
+        transform: translateX(0px) translateY(0px) rotate(360deg);
+    }
+}
+
+.ombre{
+    box-shadow: 10px 10px 52px 0px rgba(115,164,232,0.89);
+    -webkit-box-shadow: 10px 10px 52px 0px rgba(115,164,232,0.89);
+    -moz-box-shadow: 10px 10px 52px 0px rgba(115,164,232,0.89);     
+}
+
+.borderCurved{
+    border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+}
+
+footer{
+    color: white;
+    line-height: 3em;
+    text-decoration: none;
+    font-size: 1.1em;
+    
+}
+
+footer a{
+    color: white;
+    
+    text-decoration: none;
+}
