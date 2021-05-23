@@ -68,7 +68,7 @@
         <div id="playerOneId" class="playerOne col-6 col-md-3 order-1 text-center">
           
           <div class="form-group"> 
-            <input type="text" class="form-control" id="playerOneName" name="playerOneName" placeholder="Player One">
+            <input type="text" class="form-control defaultTheme" id="playerOneName" name="playerOneName" placeholder="Player One">
           </div>
           <div id="playerOneStatus"></div>
           <div id="playerOneGlobalScore" class=" ombre borderCurved"></div>
@@ -120,7 +120,7 @@
         <div id="playerTwoId" class="playerTwo col-6 col-md-3 order-3 text-center">
           
           <div class="form-group"> 
-            <input type="text" class="form-control" id="playerTwoName" name="playerTwoName" placeholder="Player Two">
+            <input type="text" class="form-control defaultTheme" id="playerTwoName" name="playerTwoName" placeholder="Player Two">
           </div>
           <div id="playerTwoStatus"></div>
           <div id="playerTwoGlobalScore" class="ombre borderCurved"></div>
@@ -170,7 +170,7 @@
               </div>
 
               <div class="custom-control"> 
-                <input type="number" id="losingDiceFace" name="losingDiceFace" min="1" max="6" value="1">
+                <input type="number" id="losingDiceFace" name="losingDiceFace" min="1" max="12" value="1">
                 <label for="losingDiceFace">Losing dice's face</label>
               </div>
 
@@ -188,15 +188,7 @@
                 <input type="checkbox" id="defaultTheme" name="defaultTheme" class="custom-control-input" checked>
                 <label for="defaultTheme" class="custom-control-label">Toggle Default / Dark Theme</label>
               </div>
-
             </div> 
-
-            <!-- <div class="col"></div>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">Message:</label>
-                  <textarea class="form-control" id="message-text"></textarea>
-                </div>
-            </div> -->
           </div>
         </form> 
       </div>
@@ -218,13 +210,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>
+        <p class="checkRulesText">
           The game enrole two players on one and only screen.
           Each player has a temporary score (ROUND) and a global score (GLOBAL).
           On player's round, the round score of the player is set to zero, then the player can roll the dice as many time he wants.
           The result of round is added to ROUND score of the player.
           During his turn, the player can decide to :
-          <ul>
+          <ul class="checkRulesText">
             <li>
               Click on HOLD button, so that his current round score is added to his GLOBAL score.
               As a result, the second player take hand.

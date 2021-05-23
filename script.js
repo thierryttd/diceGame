@@ -11,9 +11,9 @@ let playerTwoCurrentScore = 0;
 let nbrRollPlayerOne = 0;
 let nbrRollPlayerTwo = 0;
 
-let diceType = document.getElementById('diceType').value;
-let losingDiceFace=document.getElementById('losingDiceFace').value;
-let winningScore=document.getElementById('winningScore').value;
+let diceType = parseInt(document.getElementById('diceType').value);
+let losingDiceFace = parseInt(document.getElementById('losingDiceFace').value);
+let winningScore = parseInt(document.getElementById('winningScore').value);
 let setSound=document.getElementById('setSound').checked;
 let defaultTheme=document.getElementById('defaultTheme').checked;
 
@@ -33,12 +33,10 @@ for (let i=0; i < nbrImgAvatar; i++){
     }
     sourceAvatar=pathAvatarPrefix + poste + pathAvatarSufix;
     arrayAvatarOne.push(sourceAvatar);
-    // arrayAvatarTwo.push(sourceAvatar);
 };
 
 // Tri aléatoire du tableau pour présenter les images différemment a chaque chargement page
 shuffleArray(arrayAvatarOne);
-// shuffleArray(arrayAvatarTwo);
 
 // Création du tableau représentant les faces du dé 12 faces mawimun sont prévues
 let arrayDiceDodecagone=[];
@@ -50,7 +48,7 @@ let pathDiceFacesSufix = ".png";
 for (let i=0; i < 12; i++){
     let j = i + 1;
     let numOrdre = '0';
-    if ( i > 9) {
+    if ( i > 8) {
         poste = j;
     }else{
         poste = numOrdre + j;
@@ -144,26 +142,42 @@ let positionPlayerTwo=document.getElementById('playerTwoId');
 //Quand modal se ferme, récupération des informations saisies
 $('#settingModal').on('hidden.bs.modal', function (event) {
     
-//     newGameFct()
-    diceType = document.getElementById('diceType').value;
-    losingDiceFace=document.getElementById('losingDiceFace').value;
-    winningScore=document.getElementById('winningScore').value;
+    diceType = parseInt(document.getElementById('diceType').value);
+    losingDiceFace = parseInt(document.getElementById('losingDiceFace').value);
+    winningScore = parseInt(document.getElementById('winningScore').value);
     setSound=document.getElementById('setSound').checked;
     defaultTheme=document.getElementById('defaultTheme').checked;
     elmtBody = document.getElementById('body');
     elmtSettingModal=document.getElementById('settingModalContent');
     elmtRuleModal=document.getElementById('checkRulesContent');
-    
+
+    if (isNaN(diceType) || isNaN(losingDiceFace) || isNaN(winningScore)){
+        alert('Au moins un paramètre n"est pas numérique, vos modifications ne seront pas prises en ncompte pour cette partie.')
+        diceType = 6;
+        losingDiceFace = 1;
+        winningScore = 100;
+    }
+
+    if (diceType < 1 || diceType > 12  || losingDiceFace < 1 || losingDiceFace > diceType || winningScore < 1){
+        alert('Le nombre de faces du dé doit être compris entre 1 et 12, et la face perdante doit être comprise en 1 et le nombre de faces. '
+        + ' le score gagnant doit être supérieur ou égal à 1.'
+        + 'Vos indications ' + diceType + ' / ' + losingDiceFace  + winningScore 
+        + ' ne semblent pas respecter ces contraintes. '
+        + 'Les valeurs par défaut 6, 1 et 100, seront donc maintenues pour cette partie.')
+        diceType = 6;
+        losingDiceFace = 1;
+        winningScore = 100;
+    }
+
     if (defaultTheme){
-        // alert('defaultTheme true');
         elmtBody.classList.remove('darkMode');
         elmtBody.classList.add('defaultTheme');
         elmtSettingModal.classList.remove('darkMode');
         elmtSettingModal.classList.add('defaultTheme');
         elmtRuleModal.classList.remove('darkMode');
         elmtRuleModal.classList.add('defaultTheme');
-        document.getElementById('playerOneName').classList.remove('darkMode');
-        document.getElementById('playerOneName').classlist.add('defaultTheme');
+        // document.getElementById('playerOneName').classList.remove('darkMode');
+        // document.getElementById('playerOneName').classlist.add('defaultTheme');
     }else{
         elmtBody.classList.remove('defaultTheme');
         elmtBody.classList.add('darkMode');
@@ -171,8 +185,8 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
         elmtSettingModal.classList.add('darkMode');
         elmtRuleModal.classList.remove('defaultTheme');
         elmtRuleModal.classList.add('darkMode');
-        document.getElementById('playerOneName').classliste.remove('defaultTheme');
-        document.getElementById('playerOneName').classlist.add('darkMode');
+        // document.getElementById('playerOneName').classliste.remove('defaultTheme');
+        // document.getElementById('playerOneName').classlist.add('darkMode');
     }
 
 })
@@ -404,7 +418,6 @@ function rollFct(){
     
     let valeur = parseInt(arrayDiceFaces[0].substr(indexOfFirst + 1 ,2));
     
-    // alert ('Losing dice face et valeur  ' + losingDiceFace + 'valeur ' + valeur);
     if (valeur == losingDiceFace){
         score = 0;
         playerOneCurrentScore = score;

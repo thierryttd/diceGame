@@ -10,6 +10,11 @@ body{
 h1{
     font-size: 1.5em;
 }
+
+.checkRulesText{
+    font-size: 1.1em;
+}
+
 #buttonBar{
     height: 10vh;
     /* background-color: darkblue; */
