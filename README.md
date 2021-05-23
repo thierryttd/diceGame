@@ -1,0 +1,2 @@
+# diceGame
+Training evaluation javascript
