@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Jeu : Le premier à 100 !.">
-    <title>Jeu de dé : Premier à 100.</title>
+    <meta name="description" content="Play the game : Who will be the first to 100 ?">
+    <title>The die is cast.</title>
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     
     <!-- Bootstrap CSS -->
@@ -20,57 +20,53 @@
     <main class="container">
       <header class="row mt-2">
         <div class="col-12">
-          <!-- <h1>le jeu de dé !</h1> -->
           <img id="spinDice" src="images/diceFace-06.png" class="float-left" width="30" height="30">
-          <h1>le jeu de dé !</h1>
+          <h1>Play the game : the crazy dice</h1>
         </div>
       </header>
       
       <section id="buttonBar" class="row mt-2 borderCurved">
-        <div class="col-12 col-md-6 text-right">
+        <div class="col-12 text-center">
           <button id="btnSettingModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingModal">
             Setting
           </button>
           <button id="btnCheckRules" type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkRules">
             Rules
           </button>
-        </div>
-        <div class="col-12 col-md-6 text-left">
-          <button id="newGame" class="btn btn-primary">New Game</button>
-          <button id="cancelGame" class="btn btn-primary">Cancel Game</button>
+          <button id="newGame" class="btn btn-primary">
+            Play
+          </button>
+          <button id="cancelGame" class="btn btn-primary">
+            Cancel
+          </button>
         </div>
       </section>
 
-      <section class=" row bordercurved ombre">
+      <section class=" row">
         <div  id="rollLogPlayerOne" class="col-6 order-1">
         <!-- <img src="images/diceFace-06.png" class="float-left" width="30" height="30">
         <img src="images/diceFace-03.png" class="float-left" width="30" height="30"> -->
         </div>
-        <div id ="rollLogPlayerTwo" class="col-6 order-2">
+        <div id ="rollLogPlayerTwo" class="col-6 order-2 float-rihgt">
           <!-- <img src="images/diceFace-05.png" class="float-left" width="30" height="30"> -->
           </div>
       </section>
 
       <section class="row mt-2">
-        <div class="row col-6">
-
-        </div>
         <div id="playerOneAvatarId" class="playerOneAvatar col-7 col-md-12">
           <div id="playerOneAvatarList" class="ombre borderCurved d-flex justify-content-center"> <!-- playerOneAvatar -->
           
           </div><!-- End  playerOneAvatar -->
         </div>
-        
       </section>
 
       <section class="row mt-2">
 
         <div id="playerOneId" class="playerOne col-6 col-md-3 order-1 text-center">
-          
           <div class="form-group"> 
             <input type="text" class="form-control defaultTheme" id="playerOneName" name="playerOneName" placeholder="Player One">
           </div>
-          <div id="playerOneStatus"></div>
+          <!-- <div id="playerOneStatus"></div> -->
           <div id="playerOneGlobalScore" class=" ombre borderCurved"></div>
           
           <div class="ombre borderCurved"> 
@@ -81,48 +77,38 @@
         </div>
 
         <div class="diceTrack borderCurved col-6 col-md-6 order-2">
-         
-              <!-- <section class="row"> -->
-                <div class="col-6">
-                  <p>
-                    <!-- <h1>Piste de dés</h1> -->
-                    
-                  </p>
-                </div>
-                <!-- <div class="col-6">
-                  
-                </div> -->
-              <!-- </section> -->
-              <!-- <section class="row"> -->
-                <div class="col-12">
-                  <p id="dice">
-                    <!-- <img src="/images/diceFace-2.png" class="diceRoll"> -->
-                  </p>
-                </div>
-             
-              <section class="row">
-                <div class="col-6 text-right">
-                  <p>
-                    <button id="roll" class="btn btn-primary">Roll</button>
-                   
-                  </p>
-                </div>
-                <div class="col-6 text-left">
-                  <p>
-                    <button id="hold" class="btn btn-primary">Hold</button>
-                  </p>
-                </div>
-              </section>
-         
+          <div class="col-6">
+            <p>
+              <!-- <h1>Piste de dés</h1> -->
+            </p>
+          </div>
+          <div class="col-12">
+              <p id="dice">
+                <!-- <img src="/images/diceFace-2.png" class="diceRoll"> -->
+              </p>
+          </div>
+          
+          <section class="row">
+            <div class="col-6 text-right">
+              <p>
+                <button id="roll" class="btn btn-primary">Throw</button>
+                
+              </p>
+            </div>
+            <div class="col-6 text-left">
+              <p>
+                <button id="hold" class="btn btn-primary">Keep</button>
+              </p>
+            </div>
+          </section>
         </div>
-
 
         <div id="playerTwoId" class="playerTwo col-6 col-md-3 order-3 text-center">
           
           <div class="form-group"> 
             <input type="text" class="form-control defaultTheme" id="playerTwoName" name="playerTwoName" placeholder="Player Two">
           </div>
-          <div id="playerTwoStatus"></div>
+          <!-- <div id="playerTwoStatus"></div> -->
           <div id="playerTwoGlobalScore" class="ombre borderCurved"></div>
           
           <div class="ombre borderCurved"> 
@@ -165,23 +151,23 @@
           <div class="row">
             <div class="col">  
               <div class="custom-control">   
-                <input type="number" id="diceType" name="diceType" min="6" max="12" value="6">
-                <label for="diceType">Number of dice's faces </label>
+                <input class='defaultTheme' type="number" id="diceType" name="diceType" min="6" max="12" value="6">
+                <label for="diceType">Number of die's sides </label>
               </div>
 
               <div class="custom-control"> 
-                <input type="number" id="losingDiceFace" name="losingDiceFace" min="1" max="12" value="1">
-                <label for="losingDiceFace">Losing dice's face</label>
+                <input class='defaultTheme' type="number" id="losingDiceFace" name="losingDiceFace" min="1" max="12" value="1">
+                <label for="losingDiceFace">Losing number</label>
               </div>
 
               <div class="custom-control"> 
-                <input type="number" id="winningScore" name="winningScore" value="100">
+                <input class='defaultTheme' type="number" id="winningScore" name="winningScore" value="100">
                 <label for="winningScore">Winning Score</label>
               </div>
 
               <div class="custom-control custom-switch">
                 <input type="checkbox" id="setSound" name="setSound" class="custom-control-input" checked>
-                <label for="setSound" class="custom-control-label">Sound</label>
+                <label for="setSound" class="custom-control-label">Music</label>
               </div>
 
               <div class="custom-control custom-switch">
@@ -211,9 +197,9 @@
       </div>
       <div class="modal-body">
         <p class="checkRulesText">
-          The game enrole two players on one and only screen.
+          The game enroles two players on one and only screen.
           Each player has a temporary score (ROUND) and a global score (GLOBAL).
-          On player's round, the round score of the player is set to zero, then the player can roll the dice as many time he wants.
+          On player's round, the round score of the player is set to zero, then the player can roll the die as many time he wants.
           The result of round is added to ROUND score of the player.
           During his turn, the player can decide to :
           <ul class="checkRulesText">
@@ -222,7 +208,7 @@
               As a result, the second player take hand.
             </li>
             <li>
-              Roll the dice. If he get a ONE, he lose his current round score and let the secon player play.
+              Roll the die. If he get a ONE, he lose his current round score and let the second player play.
             </li>
             The winner is the first player to obtain 100 points with his global score.
           </ul>

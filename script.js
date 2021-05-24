@@ -1,6 +1,6 @@
 //Initialisation
 const nbrImgAvatar = 10;
-const logRollMax = 4;
+const logRollMax = 7;
 
 let playerOneActif = Boolean(true);
 let playerTwoActif = Boolean(false);
@@ -19,7 +19,6 @@ let defaultTheme=document.getElementById('defaultTheme').checked;
 
 // Création des deux tableaux contenant les chemins d'accès aux images avatars
 let arrayAvatarOne=[];
-// let arrayAvatarTwo=[];
 
 let pathAvatarPrefix = "images/avatar-";
 let pathAvatarSufix = ".png";
@@ -71,9 +70,6 @@ btnNewGame.addEventListener('click',newGameFct);
 let btnCancelGame=document.getElementById('cancelGame');
 btnCancelGame.addEventListener('click',cancelGameFct);
 btnCancelGame.disabled = true;
-
-// let btnSwapPlayers=document.getElementById('swapPlayers');
-// btnSwapPlayers.addEventListener('click',swapPlayerFct);
 
 let btnRoll=document.getElementById('roll');
 btnRoll.addEventListener('click',rollFct);
@@ -161,7 +157,7 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
     if (diceType < 1 || diceType > 12  || losingDiceFace < 1 || losingDiceFace > diceType || winningScore < 1){
         alert('Le nombre de faces du dé doit être compris entre 1 et 12, et la face perdante doit être comprise en 1 et le nombre de faces. '
         + ' le score gagnant doit être supérieur ou égal à 1.'
-        + 'Vos indications ' + diceType + ' / ' + losingDiceFace  + winningScore 
+        + 'Vos indications ' + diceType + ' / ' + losingDiceFace + ' / ' + winningScore 
         + ' ne semblent pas respecter ces contraintes. '
         + 'Les valeurs par défaut 6, 1 et 100, seront donc maintenues pour cette partie.')
         diceType = 6;
@@ -176,8 +172,16 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
         elmtSettingModal.classList.add('defaultTheme');
         elmtRuleModal.classList.remove('darkMode');
         elmtRuleModal.classList.add('defaultTheme');
-        // document.getElementById('playerOneName').classList.remove('darkMode');
-        // document.getElementById('playerOneName').classlist.add('defaultTheme');
+        document.getElementById('playerOneName').classList.remove('darkMode');
+        document.getElementById('playerOneName').classList.add('defaultTheme');
+        document.getElementById('playerTwoName').classList.remove('darkMode');
+        document.getElementById('playerTwoName').classList.add('defaultTheme');
+        document.getElementById('diceType').classList.remove('darkMode');
+        document.getElementById('diceType').classList.add('defaultTheme');
+        document.getElementById('losingDiceFace').classList.remove('darkMode');
+        document.getElementById('losingDiceFace').classList.add('defaultTheme');
+        document.getElementById('winningScore').classList.remove('darkMode');
+        document.getElementById('winningScore').classList.add('defaultTheme');
     }else{
         elmtBody.classList.remove('defaultTheme');
         elmtBody.classList.add('darkMode');
@@ -185,8 +189,16 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
         elmtSettingModal.classList.add('darkMode');
         elmtRuleModal.classList.remove('defaultTheme');
         elmtRuleModal.classList.add('darkMode');
-        // document.getElementById('playerOneName').classliste.remove('defaultTheme');
-        // document.getElementById('playerOneName').classlist.add('darkMode');
+        document.getElementById('playerOneName').classList.remove('defaultTheme');
+        document.getElementById('playerOneName').classList.add('darkMode');
+        document.getElementById('playerTwoName').classList.remove('defaultTheme');
+        document.getElementById('playerTwoName').classList.add('darkMode');
+        document.getElementById('diceType').classList.remove('defaultTheme');
+        document.getElementById('diceType').classList.add('darkMode');
+        document.getElementById('losingDiceFace').classList.remove('defaultTheme');
+        document.getElementById('losingDiceFace').classList.add('darkMode');
+        document.getElementById('winningScore').classList.remove('defaultTheme');
+        document.getElementById('winningScore').classList.add('darkMode');
     }
 
 })
@@ -240,19 +252,19 @@ function newGameFct(){
         playerTwoCurrentScore = 0;
 
         tt=document.getElementById('playerOneGlobalScore');
-        tt.innerText='Score global ' + playerOneGlobalScore;
+        tt.innerText='Global Score ' + playerOneGlobalScore;
         tt=document.getElementById('playerOneCurrentScore');
-        tt.innerText='Score courant ' + playerOneCurrentScore;
+        tt.innerText='Current Score ' + playerOneCurrentScore;
 
         tt=document.getElementById('playerTwoGlobalScore');
-        tt.innerText='Score global ' + playerTwoGlobalScore;
+        tt.innerText='Global Score ' + playerTwoGlobalScore;
         tt=document.getElementById('playerTwoCurrentScore');
-        tt.innerText='Score courant ' + playerTwoCurrentScore;
+        tt.innerText='Current Score ' + playerTwoCurrentScore;
 
         var tt=document.getElementById('playerOneAvatarId');
         tt.classList.add('d-none');
     }else{
-        alert('Two players must be selected, before game starting!')
+        alert('Two players must be selected, before game starting. You can set a cutomized name to each player.')
     }
 }
 
@@ -268,14 +280,14 @@ function cancelGameFct(){
     document.getElementById('playerTwoName').disabled = false;
 
     tt=document.getElementById('playerOneGlobalScore');
-    tt.innerText='Score global ' + playerOneGlobalScore;
+    tt.innerText='Global Score ' + playerOneGlobalScore;
     tt=document.getElementById('playerOneCurrentScore');
-    tt.innerText='Score courant ' + playerOneCurrentScore;
+    tt.innerText='Current Score ' + playerOneCurrentScore;
 
     tt=document.getElementById('playerTwoGlobalScore');
-    tt.innerText='Score global ' + playerTwoGlobalScore;
+    tt.innerText='Global Score ' + playerTwoGlobalScore;
     tt=document.getElementById('playerTwoCurrentScore');
-    tt.innerText='Score courant ' + playerTwoCurrentScore;
+    tt.innerText='Current Score ' + playerTwoCurrentScore;
 
     btnRoll.disabled = true;
     btnHold.disabled = true;
@@ -299,18 +311,18 @@ function holdFct(){
         playerOneGlobalScore += playerOneCurrentScore;
         playerOneCurrentScore = 0;
         tt=document.getElementById('playerOneGlobalScore');
-        tt.innerText='Score global ' + playerOneGlobalScore;
+        tt.innerText='Global Score ' + playerOneGlobalScore;
         tt=document.getElementById('playerOneCurrentScore');
-        tt.innerText='Score courant ' + playerOneCurrentScore;
+        tt.innerText='Current score ' + playerOneCurrentScore;
         
         
     }else{
         playerTwoGlobalScore += playerTwoCurrentScore;
         playerTwoCurrentScore = 0;
         tt=document.getElementById('playerTwoGlobalScore');
-        tt.innerText='Score global ' + playerTwoGlobalScore;
+        tt.innerText='Global Score ' + playerTwoGlobalScore;
         tt=document.getElementById('playerTwoCurrentScore');
-        tt.innerText='Score courant ' + playerTwoCurrentScore;
+        tt.innerText='Current score ' + playerTwoCurrentScore;
     }
     
     if ((playerOneGlobalScore >= winningScore) || (playerTwoGlobalScore >= winningScore)){
@@ -350,8 +362,12 @@ function rollFct(){
     var imageDice = document.createElement('img');
     imageDice.src = arrayDiceFaces[0];
 
-    if (tt.clientWidth < 500) {
-        imageDice.className = "img-fluid diceRollSmall";
+    if (tt.clientWidth < 300) {
+        if (tt.clientWidth < 220){
+            imageDice.className = "img-fluid diceRollSmall";
+        }else{
+        imageDice.className = "img-fluid diceRollMedium";
+        }
     }else{
         imageDice.className = "img-fluid diceRoll";
     }
@@ -434,10 +450,10 @@ function rollFct(){
 
     if (playerOneActif) {
         tt=document.getElementById('playerOneCurrentScore');
-        tt.innerText='Score courant ' + score;
+        tt.innerText='Current score ' + score;
     }else{
         tt=document.getElementById('playerTwoCurrentScore');
-        tt.innerText='Score courant ' + score;
+        tt.innerText='Current score ' + score;
     }
 
     if (score >= winningScore){
