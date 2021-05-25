@@ -8,6 +8,7 @@ body{
 
 h1{
     font-size: 1.5em;
+    /* color: blue; */
 }
 
 .checkRulesText{
@@ -18,13 +19,14 @@ h1{
     height: 10vh;
     /* background-color: darkblue; */
 }
-#playerOneAvatarList {
+
+#avatarList {
     height:10vh;
     overflow:auto;
     padding: 0.3vw;
 }
 
-#playerOne{
+#playerOne, #playerTwo{
     background-color: #0b6c49;
 }
 

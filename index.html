@@ -14,17 +14,18 @@
     <link rel="stylesheet" href="style.css">
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   </head>
-  
 
   <body id="body" class="defaultTheme">
-    <main class="container">
+    <main id="main" class="container bg-light borderCurved">
+
       <header class="row mt-2">
         <div class="col-12">
           <img id="spinDice" src="images/diceFace-06.png" class="float-left" width="30" height="30">
           <h1>Play the game : the crazy dice</h1>
         </div>
       </header>
-      
+
+      <!-- Buttons bar to general game managing-->
       <section id="buttonBar" class="row mt-2 borderCurved">
         <div class="col-12 text-center">
           <button id="btnSettingModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingModal">
@@ -42,190 +43,148 @@
         </div>
       </section>
 
-      <section class=" row">
-        <div  id="rollLogPlayerOne" class="col-6 order-1">
-        <!-- <img src="images/diceFace-06.png" class="float-left" width="30" height="30">
-        <img src="images/diceFace-03.png" class="float-left" width="30" height="30"> -->
-        </div>
-        <div id ="rollLogPlayerTwo" class="col-6 order-2 float-rihgt">
-          <!-- <img src="images/diceFace-05.png" class="float-left" width="30" height="30"> -->
-          </div>
+      <!-- Where log of the die cast take place-->
+      <section class=" row"> 
+        <div id="rollLogPlayerOne" class="col-6 order-1"></div>
+        <div id="rollLogPlayerTwo" class="col-6 order-2" ></div>
       </section>
 
-      <section class="row mt-2">
-        <div id="playerOneAvatarId" class="playerOneAvatar col-7 col-md-12">
-          <div id="playerOneAvatarList" class="ombre borderCurved d-flex justify-content-center"> <!-- playerOneAvatar -->
-          
-          </div><!-- End  playerOneAvatar -->
+      <!-- Where list of avatars images take place -->
+      <section class="row mt-2"> 
+        <div id="avatarId" class="avatar col-7 col-md-12">
+          <div id="avatarList" class="d-flex justify-content-center"></div>
         </div>
       </section>
 
+      <!-- PLayer one description -->
       <section class="row mt-2">
-
         <div id="playerOneId" class="playerOne col-6 col-md-3 order-1 text-center">
           <div class="form-group"> 
             <input type="text" class="form-control defaultTheme" id="playerOneName" name="playerOneName" placeholder="Player One">
           </div>
-          <!-- <div id="playerOneStatus"></div> -->
           <div id="playerOneGlobalScore" class=" ombre borderCurved"></div>
-          
           <div class="ombre borderCurved"> 
             <p id="playerOne" class="borderCurved"></p>
           </div>
           <div id="playerOneCurrentScore" class="ombre borderCurved"></div>
-
         </div>
 
+        <!-- Reserved place for Dice track  and buttons throw and keep-->
         <div class="diceTrack borderCurved col-6 col-md-6 order-2">
-          <div class="col-6">
-            <p>
-              <!-- <h1>Piste de dés</h1> -->
-            </p>
-          </div>
           <div class="col-12">
               <p id="dice">
-                <!-- <img src="/images/diceFace-2.png" class="diceRoll"> -->
+                <!-- <img> -->
               </p>
           </div>
-          
-          <section class="row">
-            <div class="col-6 text-right">
-              <p>
-                <button id="roll" class="btn btn-primary">Throw</button>
-                
-              </p>
+          <div class="row">
+            <div class="col text-center">
+              <button id="roll" class="btn btn-primary">Throw</button>
+              <button id="hold" class="btn btn-primary">Keep</button>
             </div>
-            <div class="col-6 text-left">
-              <p>
-                <button id="hold" class="btn btn-primary">Keep</button>
-              </p>
-            </div>
-          </section>
+          </div>
         </div>
 
+        <!-- PLayer two description -->
         <div id="playerTwoId" class="playerTwo col-6 col-md-3 order-3 text-center">
-          
           <div class="form-group"> 
             <input type="text" class="form-control defaultTheme" id="playerTwoName" name="playerTwoName" placeholder="Player Two">
           </div>
-          <!-- <div id="playerTwoStatus"></div> -->
           <div id="playerTwoGlobalScore" class="ombre borderCurved"></div>
-          
           <div class="ombre borderCurved"> 
             <p id="playerTwo" class=" ombre borderCurved"></p>
-           </div>
-
+          </div>
            <div id="playerTwoCurrentScore" class="ombre borderCurved"></div>
         </div>
-
       </section>
-      
     </main>
     
-    <!-- <footer class="container-fluid bg-primary">
-      <div class="row align-middle">
-        <div class="col-sm-4">
-          <a href="commingSoon.html">Mentions Légales</a>
-        </div>
-        <div class="col-sm-4">
-          <a href="commingSoon.html">Gestion données personnelles</a>
-        </div>
-        <div class="col-sm-4">
-          <a href="commingSoon.html">Crédits photos</a>
-        </div>
-      </div>
-    </footer> -->
-    
-<!-- Modal  General Settings-->
-<div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen-sm-down">
-    <div class="modal-content" id="settingModalContent">
-      <div class="modal-header">
-        <h5 class="modal-title" id="settingModalLabel">Set up your favorite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="row">
-            <div class="col">  
-              <div class="custom-control">   
-                <input class='defaultTheme' type="number" id="diceType" name="diceType" min="6" max="12" value="6">
-                <label for="diceType">Number of die's sides </label>
-              </div>
-
-              <div class="custom-control"> 
-                <input class='defaultTheme' type="number" id="losingDiceFace" name="losingDiceFace" min="1" max="12" value="1">
-                <label for="losingDiceFace">Losing number</label>
-              </div>
-
-              <div class="custom-control"> 
-                <input class='defaultTheme' type="number" id="winningScore" name="winningScore" value="100">
-                <label for="winningScore">Winning Score</label>
-              </div>
-
-              <div class="custom-control custom-switch">
-                <input type="checkbox" id="setSound" name="setSound" class="custom-control-input" checked>
-                <label for="setSound" class="custom-control-label">Music</label>
-              </div>
-
-              <div class="custom-control custom-switch">
-                <input type="checkbox" id="defaultTheme" name="defaultTheme" class="custom-control-input" checked>
-                <label for="defaultTheme" class="custom-control-label">Toggle Default / Dark Theme</label>
-              </div>
-            </div> 
+    <!-- Modal  General Settings-->
+    <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen-sm-down">
+        <div class="modal-content" id="settingModalContent">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settingModalLabel">Set up your favorite</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        </form> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="saveGlobalSetting" type="button" class="btn btn-primary">Save changes</button>
+          <div class="modal-body">
+            <form>
+              <div class="row">
+                <div class="col">  
+                  <div class="custom-control">   
+                    <input class='defaultTheme' type="number" id="diceType" name="diceType" min="6" max="12" value="6">
+                    <label for="diceType">Number of die's sides </label>
+                  </div>
+
+                  <div class="custom-control"> 
+                    <input class='defaultTheme' type="number" id="losingDiceFace" name="losingDiceFace" min="1" max="12" value="1">
+                    <label for="losingDiceFace">Losing number</label>
+                  </div>
+
+                  <div class="custom-control"> 
+                    <input class='defaultTheme' type="number" id="winningScore" name="winningScore" value="100">
+                    <label for="winningScore">Winning Score</label>
+                  </div>
+
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" id="setSound" name="setSound" class="custom-control-input" checked>
+                    <label for="setSound" class="custom-control-label">Music</label>
+                  </div>
+
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" id="defaultTheme" name="defaultTheme" class="custom-control-input" checked>
+                    <label for="defaultTheme" class="custom-control-label">Toggle Default / Dark Theme</label>
+                  </div>
+                </div> 
+              </div>
+            </form> 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="saveGlobalSetting" type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<!-- Modal  Check Rules -->
-<div class="modal fade" id="checkRules" tabindex="-1" aria-labelledby="checkRulesLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen-sm-down">
-    <div class="modal-content" id="checkRulesContent">
-      <div class="modal-header">
-        <h5 class="modal-title" id="checkRulesLabel">Game Rules</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <!-- Modal  Check Rules -->
+    <div class="modal fade" id="checkRules" tabindex="-1" aria-labelledby="checkRulesLabel" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen-sm-down">
+        <div class="modal-content" id="checkRulesContent">
+          <div class="modal-header">
+            <h5 class="modal-title" id="checkRulesLabel">Game Rules</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="checkRulesText">
+              The game enroles two players on one and only screen.
+              Each player has a temporary score (ROUND) and a global score (GLOBAL).
+              On player's round, the round score of the player is set to zero, then the player can roll the die as many time he wants.
+              The result of round is added to ROUND score of the player.
+              During his turn, the player can decide to :
+              <ul class="checkRulesText">
+                <li>
+                  Click on HOLD button, so that his current round score is added to his GLOBAL score.
+                  As a result, the second player take hand.
+                </li>
+                <li>
+                  Roll the die. If he get a ONE, he lose his current round score and let the second player play.
+                </li>
+                The winner is the first player to obtain 100 points with his global score.
+              </ul>
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <p class="checkRulesText">
-          The game enroles two players on one and only screen.
-          Each player has a temporary score (ROUND) and a global score (GLOBAL).
-          On player's round, the round score of the player is set to zero, then the player can roll the die as many time he wants.
-          The result of round is added to ROUND score of the player.
-          During his turn, the player can decide to :
-          <ul class="checkRulesText">
-            <li>
-              Click on HOLD button, so that his current round score is added to his GLOBAL score.
-              As a result, the second player take hand.
-            </li>
-            <li>
-              Roll the die. If he get a ONE, he lose his current round score and let the second player play.
-            </li>
-            The winner is the first player to obtain 100 points with his global score.
-          </ul>
-        </p>
-      </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="saveGlobalSetting" type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
     </div>
-  </div>
-</div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     
     <script src="script.js" type="text/javascript"></script>
+
   </body>
 </html>

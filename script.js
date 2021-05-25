@@ -79,36 +79,36 @@ let btnHold=document.getElementById('hold');
 btnHold.addEventListener('click', holdFct);
 btnHold.disabled = true;
 
-let playerTwoAvatarList = document.getElementById('playerTwoAvatarList');
-let playerOneAvatarList = document.getElementById('playerOneAvatarList');
+// let playerTwoAvatarList = document.getElementById('playerTwoAvatarList');
+let avatarList = document.getElementById('avatarList');
 
 arrayAvatarOne.forEach(function(item, index, array) {
     var imageAvatar = document.createElement('img');
-    imageAvatar.id = "playerOneAvatarId" + "-" + index;
+    imageAvatar.id = "avatarId" + "-" + index;
     imageAvatar.src = item;
     if (defaultTheme) {
         imageAvatar.className = "img-fluid";
     }else{
         imageAvatar.className = "img-fluid darkMode";
     }
-    playerOneAvatarList.appendChild(imageAvatar);
+    avatarList.appendChild(imageAvatar);
     
   });
 
-let playerOneAvatarClick=[];
-let playerTwoAvatarClick=[];
+let avatarClick=[];
+// let playerTwoAvatarClick=[];
 
 let avatarOneSelected='99';
 let avatarTwoSelected='99';
 
 
 for (let i=0; i < 10; i++){
-    let idOne="playerOneAvatarId-"+i;
+    let idOne="avatarId-"+i;
     let idTwo="playerTwoAvatarId-"+i;
-    playerOneAvatarClick.push(document.getElementById(idOne));
-    playerTwoAvatarClick.push(document.getElementById(idTwo));
+    avatarClick.push(document.getElementById(idOne));
+    // playerTwoAvatarClick.push(document.getElementById(idTwo));
 
-    playerOneAvatarClick[i].addEventListener('click',function(){
+    avatarClick[i].addEventListener('click',function(){
 
         if ((avatarOneSelected !== i) && (avatarTwoSelected !== i)){
             if (playerOneActif){
@@ -144,6 +144,7 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
     setSound=document.getElementById('setSound').checked;
     defaultTheme=document.getElementById('defaultTheme').checked;
     elmtBody = document.getElementById('body');
+    elmtMain = document.getElementById('main');
     elmtSettingModal=document.getElementById('settingModalContent');
     elmtRuleModal=document.getElementById('checkRulesContent');
 
@@ -168,6 +169,8 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
     if (defaultTheme){
         elmtBody.classList.remove('darkMode');
         elmtBody.classList.add('defaultTheme');
+        elmtMain.classList.remove('darkMode');
+        elmtMain.classList.add('defaultTheme');
         elmtSettingModal.classList.remove('darkMode');
         elmtSettingModal.classList.add('defaultTheme');
         elmtRuleModal.classList.remove('darkMode');
@@ -185,6 +188,8 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
     }else{
         elmtBody.classList.remove('defaultTheme');
         elmtBody.classList.add('darkMode');
+        elmtMain.classList.remove('bg-light');
+        elmtMain.classList.add('darkMode');
         elmtSettingModal.classList.remove('defaultTheme');
         elmtSettingModal.classList.add('darkMode');
         elmtRuleModal.classList.remove('defaultTheme');
@@ -261,8 +266,9 @@ function newGameFct(){
         tt=document.getElementById('playerTwoCurrentScore');
         tt.innerText='Current Score ' + playerTwoCurrentScore;
 
-        var tt=document.getElementById('playerOneAvatarId');
+        tt=document.getElementById('avatarId');
         tt.classList.add('d-none');
+      
     }else{
         alert('Two players must be selected, before game starting. You can set a cutomized name to each player.')
     }
@@ -296,7 +302,7 @@ function cancelGameFct(){
     btnSettingModal.disabled = false;
 
     // Les images avatars sont visibles
-    var tt=document.getElementById('playerOneAvatarId');
+    var tt=document.getElementById('avatarId');
     tt.classList.remove('d-none');
     
     var tt=document.getElementById('dice');
