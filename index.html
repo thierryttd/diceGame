@@ -60,7 +60,7 @@
       <section class="row mt-2">
         <div id="playerOneId" class="playerOne col-6 col-md-3 order-1 text-center">
           <div class="form-group"> 
-            <input type="text" class="form-control defaultTheme" id="playerOneName" name="playerOneName" placeholder="Player One">
+            <input type="text" class="form-control defaultTheme" id="playerOneName" name="playerOneName" value="Player One">
           </div>
           <div id="playerOneGlobalScore" class=" ombre borderCurved"></div>
           <div class="ombre borderCurved"> 
@@ -87,7 +87,8 @@
         <!-- PLayer two description -->
         <div id="playerTwoId" class="playerTwo col-6 col-md-3 order-3 text-center">
           <div class="form-group"> 
-            <input type="text" class="form-control defaultTheme" id="playerTwoName" name="playerTwoName" placeholder="Player Two">
+            <!-- <input type="text" class="form-control defaultTheme" id="playerTwoName" name="playerTwoName" placeholder="Player Two"> -->
+            <input type="text" class="form-control defaultTheme" id="playerTwoName" name="playerTwoName" value="Player Two">
           </div>
           <div id="playerTwoGlobalScore" class="ombre borderCurved"></div>
           <div class="ombre borderCurved"> 
@@ -128,6 +129,11 @@
                   </div>
 
                   <div class="custom-control custom-switch">
+                    <input type="checkbox" id="implicitWin" name="implicitWin" class="custom-control-input" checked>
+                    <label for="implicitWin" class="custom-control-label">Toggle Implicit / Explicit Victory</label>
+                  </div>
+
+                  <div class="custom-control custom-switch">
                     <input type="checkbox" id="setSound" name="setSound" class="custom-control-input" checked>
                     <label for="setSound" class="custom-control-label">Music</label>
                   </div>
@@ -136,6 +142,7 @@
                     <input type="checkbox" id="defaultTheme" name="defaultTheme" class="custom-control-input" checked>
                     <label for="defaultTheme" class="custom-control-label">Toggle Default / Dark Theme</label>
                   </div>
+
                 </div> 
               </div>
             </form> 

@@ -16,9 +16,10 @@ let losingDiceFace = parseInt(document.getElementById('losingDiceFace').value);
 let winningScore = parseInt(document.getElementById('winningScore').value);
 let setSound=document.getElementById('setSound').checked;
 let defaultTheme=document.getElementById('defaultTheme').checked;
+let implicitWin = document.getElementById('implicitWin').checked;
 
-// Création des deux tableaux contenant les chemins d'accès aux images avatars
-let arrayAvatarOne=[];
+// array contain path to avatar images 
+let arrayAvatar=[];
 
 let pathAvatarPrefix = "images/avatar-";
 let pathAvatarSufix = ".png";
@@ -31,14 +32,15 @@ for (let i=0; i < nbrImgAvatar; i++){
         poste = numOrdre + i;
     }
     sourceAvatar=pathAvatarPrefix + poste + pathAvatarSufix;
-    arrayAvatarOne.push(sourceAvatar);
+    arrayAvatar.push(sourceAvatar);
 };
 
-// Tri aléatoire du tableau pour présenter les images différemment a chaque chargement page
-shuffleArray(arrayAvatarOne);
+// sort array to change order of avatars images on page load
+shuffleArray(arrayAvatar);
 
-// Création du tableau représentant les faces du dé 12 faces mawimun sont prévues
+// array for biggest possible die up to 12 sides
 let arrayDiceDodecagone=[];
+// this array to manage selected die
 let arrayDiceFaces=[];
 
 let pathDiceFacesPrefix = "images/diceFace-";
@@ -57,13 +59,13 @@ for (let i=0; i < 12; i++){
     arrayDiceDodecagone.push(sourceDiceFaces);
 };
 
-// Tableau des historiques de lancements de dé
+// array to manage history of dice roll
 let rollLogPlayerOne = [];
 let rollLogPlayerTwo = [];
 
 
-let btnSettingModal = document.getElementById('btnSettingModal');
-
+// let btnSettingModal = document.getElementById('btnSettingModal');
+// BUttons definition
 let btnNewGame=document.getElementById('newGame');
 btnNewGame.addEventListener('click',newGameFct);
 
@@ -79,10 +81,9 @@ let btnHold=document.getElementById('hold');
 btnHold.addEventListener('click', holdFct);
 btnHold.disabled = true;
 
-// let playerTwoAvatarList = document.getElementById('playerTwoAvatarList');
+// Inject avatars images in the list of choice, each of the image will have an id
 let avatarList = document.getElementById('avatarList');
-
-arrayAvatarOne.forEach(function(item, index, array) {
+arrayAvatar.forEach(function(item, index, array) {
     var imageAvatar = document.createElement('img');
     imageAvatar.id = "avatarId" + "-" + index;
     imageAvatar.src = item;
@@ -92,22 +93,20 @@ arrayAvatarOne.forEach(function(item, index, array) {
         imageAvatar.className = "img-fluid darkMode";
     }
     avatarList.appendChild(imageAvatar);
-    
   });
 
+//   Array to manage what avatar is choosen, the aim is to avoid the same choice for the two players
 let avatarClick=[];
-// let playerTwoAvatarClick=[];
 
+// no avatar choosen for any player
 let avatarOneSelected='99';
 let avatarTwoSelected='99';
 
-
+// Make avatar clickable, when an avatar is clicked, assign the image to the actif player
+// only if his choice is different from the other player
 for (let i=0; i < 10; i++){
     let idOne="avatarId-"+i;
-    let idTwo="playerTwoAvatarId-"+i;
     avatarClick.push(document.getElementById(idOne));
-    // playerTwoAvatarClick.push(document.getElementById(idTwo));
-
     avatarClick[i].addEventListener('click',function(){
 
         if ((avatarOneSelected !== i) && (avatarTwoSelected !== i)){
@@ -121,7 +120,7 @@ for (let i=0; i < 10; i++){
 
             var imageAvatar = document.createElement('img');
             imageAvatar.id = ('imgIdAvatar-' + i);
-            imageAvatar.src = arrayAvatarOne[i];
+            imageAvatar.src = arrayAvatar[i];
             imageAvatar.className = "img-fluid";
             tt.innerHTML='';
             tt.appendChild(imageAvatar);
@@ -135,7 +134,7 @@ let positionPlayerOne=document.getElementById('playerOneId');
 let positionPlayerTwo=document.getElementById('playerTwoId');
 
 
-//Quand modal se ferme, récupération des informations saisies
+// when modal used to set parameters, get values and control them
 $('#settingModal').on('hidden.bs.modal', function (event) {
     
     diceType = parseInt(document.getElementById('diceType').value);
@@ -143,6 +142,7 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
     winningScore = parseInt(document.getElementById('winningScore').value);
     setSound=document.getElementById('setSound').checked;
     defaultTheme=document.getElementById('defaultTheme').checked;
+    implicitWin = document.getElementById('implicitWin').checked;
     elmtBody = document.getElementById('body');
     elmtMain = document.getElementById('main');
     elmtSettingModal=document.getElementById('settingModalContent');
@@ -208,7 +208,9 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
 
 })
 
-
+// function link to play button
+// Initialization of scores, number of rolls, rolls log and force player one to be active
+// maybe during the previous run, player have been swap as a result, new swap to establish default players positions
 function newGameFct(){
 
     nbrRollPlayerOne = 0;
@@ -226,17 +228,18 @@ function newGameFct(){
         positionPlayerTwo.classList.remove('order-1');
         positionPlayerTwo.classList.add('order-3');
 
-        document.getElementById('rollLogPlayerOne').classList.remove('order-2');
-        document.getElementById('rollLogPlayerOne').classList.add('order-1');
+        // document.getElementById('rollLogPlayerOne').classList.remove('order-2');
+        // document.getElementById('rollLogPlayerOne').classList.add('order-1');
 
-        document.getElementById('rollLogPlayerTwo').classList.remove('order-1');
-        document.getElementById('rollLogPlayerTwo').classList.add('order-2');
+        // document.getElementById('rollLogPlayerTwo').classList.remove('order-1');
+        // document.getElementById('rollLogPlayerTwo').classList.add('order-2');
     }
 
 
-    //Dimensionnement du dé selon settings actif
+    //maybe dice type has change (by modal setting) from the previous run, so that die dimension is apply
     arrayDiceFaces = arrayDiceDodecagone.slice (0, diceType);
 
+    // the two players must choose an avatar before game starting
     if ((avatarOneSelected != 99) && (avatarTwoSelected != 99)){
         btnNewGame.disabled = true;
         btnCancelGame.disabled = false;
@@ -270,7 +273,7 @@ function newGameFct(){
         tt.classList.add('d-none');
       
     }else{
-        alert('Two players must be selected, before game starting. You can set a cutomized name to each player.')
+        alert('Two avatars must be selected, before game starting. You can set a cutomized name to each player.')
     }
 }
 
@@ -301,18 +304,33 @@ function cancelGameFct(){
     btnCancelGame.disabled = true;
     btnSettingModal.disabled = false;
 
-    // Les images avatars sont visibles
-    var tt=document.getElementById('avatarId');
-    tt.classList.remove('d-none');
-    
-    var tt=document.getElementById('dice');
-    tt.innerHTML = '';
+    // avatars images are visible again, so that players can choose an other one before the new game
 
+    // var tt=document.getElementById('avatarId');
+    // tt.classList.remove('d-none');
+    
+    // var tt=document.getElementById('dice');
+    // tt.innerHTML = '';
+
+    // document.getElementById('rollLogPlayerOne').innerHTML = '';
+    // document.getElementById('rollLogPlayerTwo').innerHTML = '';
+
+    document.getElementById('avatarId').classList.remove('d-none');
+
+    // clean up dice track and rolls log
+    document.getElementById('dice').innerHTML = '';
     document.getElementById('rollLogPlayerOne').innerHTML = '';
     document.getElementById('rollLogPlayerTwo').innerHTML = '';
 }
 
+// Function assign to keep button
+// 
 function holdFct(){
+
+    // to avoid activate hold button without roll first
+    btnHold.disabled = true;
+    
+    // apply and display updated scores
     if (playerOneActif){
         playerOneGlobalScore += playerOneCurrentScore;
         playerOneCurrentScore = 0;
@@ -320,8 +338,6 @@ function holdFct(){
         tt.innerText='Global Score ' + playerOneGlobalScore;
         tt=document.getElementById('playerOneCurrentScore');
         tt.innerText='Current score ' + playerOneCurrentScore;
-        
-        
     }else{
         playerTwoGlobalScore += playerTwoCurrentScore;
         playerTwoCurrentScore = 0;
@@ -331,8 +347,11 @@ function holdFct(){
         tt.innerText='Current score ' + playerTwoCurrentScore;
     }
     
+    // check if one of the player is winning
+    // in affirmative case : applause and congratulations
+    // else move active player to the left
     if ((playerOneGlobalScore >= winningScore) || (playerTwoGlobalScore >= winningScore)){
-        // holdFct();
+
         if (setSound){
             new Audio('/sounds/win.mp3').play();
         }
@@ -345,13 +364,14 @@ function holdFct(){
         }
         
         btnRoll.disabled = true;
-        btnHold.disabled = true;
         btnNewGame.disabled = false;
 
-    }else{
-        swapPlayerFct();
+    // }else{
+    //     swapPlayerFct();
     }
     
+    // 
+    swapPlayerFct();
     playerOneActif =! playerOneActif;
     playerTwoActif =! playerTwoActif;
     
@@ -359,31 +379,33 @@ function holdFct(){
 }
 
 function rollFct(){
-
+    // let the possibility to the player to keep his score
     btnHold.disabled = false;
 
+    // dice roll simulation with shuffle array containing die sides, choose the side to expose
     shuffleArray(arrayDiceFaces);
-
-    var tt=document.getElementById('dice');
     var imageDice = document.createElement('img');
     imageDice.src = arrayDiceFaces[0];
 
+    var tt=document.getElementById('dice');
+    // apply a specific class to activate the appropriate animation, depending on dice track dimension
     if (tt.clientWidth < 300) {
         if (tt.clientWidth < 220){
             imageDice.className = "img-fluid diceRollSmall";
         }else{
-        imageDice.className = "img-fluid diceRollMedium";
+            imageDice.className = "img-fluid diceRollMedium";
         }
     }else{
         imageDice.className = "img-fluid diceRoll";
     }
 
+    // Display the randomized side of the die
     tt.innerHTML='';
     tt.appendChild(imageDice);
     
-    // Ajout dans historique
+    // Adding current roll in the player's log 
     if (playerOneActif){ 
-       
+
         tt = document.getElementById('rollLogPlayerOne');
         image = 'idLogPlayerOne-' + nbrRollPlayerOne;
         elthisto = document.createElement('img');
@@ -392,9 +414,11 @@ function rollFct(){
         elthisto.id = image;
         elthisto.width = "30";
         elthisto.height = "30";
-     
+            
         tt.appendChild(elthisto);
 
+        // For correct display on smaller screen, roll log list is limited to the constant logRollMax
+        // so in case of oveflow, the older roll is erased of the log
         if ( nbrRollPlayerOne > logRollMax){
             index = parseInt(nbrRollPlayerOne - logRollMax - 1);
             image = 'idLogPlayerOne-' + index
@@ -428,18 +452,20 @@ function rollFct(){
 
     }
     
-     // Récupération score courant
-    let score = 0;  
+     // keep current score before adding score roll
+    let score = 0;
     if (playerOneActif) {
         score = playerOneCurrentScore;
     }else{
         score = playerTwoCurrentScore;
     }
 
+    // the score is calculated from the order number contained in the name of the die side just after "-"
     indexOfFirst = arrayDiceFaces[0].indexOf('-');
-    
     let valeur = parseInt(arrayDiceFaces[0].substr(indexOfFirst + 1 ,2));
-    
+
+    // if the roll egal the side determinated as loosing side, current score force to zero and 
+    // this is the other player turn
     if (valeur == losingDiceFace){
         score = 0;
         playerOneCurrentScore = score;
@@ -454,26 +480,44 @@ function rollFct(){
         score += valeur;
     }
 
+    let virtualWinningScore = 0;
+
+    // display updated current score
     if (playerOneActif) {
         tt=document.getElementById('playerOneCurrentScore');
         tt.innerText='Current score ' + score;
+        playerOneCurrentScore = score;
+        virtualWinningScore = playerOneGlobalScore + score;
     }else{
         tt=document.getElementById('playerTwoCurrentScore');
         tt.innerText='Current score ' + score;
+        playerTwoCurrentScore = score;
+        virtualWinningScore = playerTwoGlobalScore + score;
     }
 
-    if (score >= winningScore){
-        
+    // check if updated score is up to the winning score
+    // in this case applause and display congratulation to the winner
+    // to proceed to evaluation, global score is considered, otherwise click hold button is required to
+    // take into account the current score
+    let test = 0;
+    if (implicitWin){
+        // alert('cas implicitwin vrai');
+        test = virtualWinningScore;
+    }else{
+        // alert('cas implicitwin faux');
+        test = score;
+    }
+    if (test >= winningScore){
         if (setSound){
-        new Audio('/sounds/win.mp3').play();
-        // alert('son de la victoire');
+            new Audio('/sounds/win.mp3').play();
         }
 
         let para = document.getElementById('dice');
+
         if (playerOneActif) {
-            para.innerText = document.getElementById('playerOneName').value + ', vous avez gagné !';
+            para.innerText = document.getElementById('playerOneName').value + ', you win !';
         }else{
-            para.innerText = document.getElementById('playerTwoName').value + ', vous avez gagné !';
+            para.innerText = document.getElementById('playerTwoName').value + ', you win !';
         }
       
         btnRoll.disabled = true;
@@ -481,15 +525,10 @@ function rollFct(){
         btnNewGame.disabled = false;
         btnSettingModal.disabled = false;
     }
-    
-    // Affectation du score au bon joueur
-    if (playerOneActif) {
-        playerOneCurrentScore = score;
-    }else{
-        playerTwoCurrentScore = score;
-    }
 }
 
+// function activated when changing hand
+// the active player and his roll log is always on the left (or on the top for smaller screen)
 function swapPlayerFct(){
         if ( positionPlayerOne.classList.contains('order-1')) {
 
