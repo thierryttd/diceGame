@@ -16,7 +16,7 @@
   </head>
 
   <body id="body" class="defaultTheme">
-    <main id="main" class="container bg-light borderCurved">
+    <main id="main" class="container borderCurved defaultTheme">
 
       <header class="row mt-2">
         <div class="col-12">
@@ -56,24 +56,15 @@
         </div>
       </section>
 
-      <!-- PLayer one description -->
       <section class="row mt-2">
+        <!-- PLayer one description -->
         <div id="playerOneId" class="playerOne col-6 col-md-3 order-1 text-center">
-          <div class="form-group"> 
-            <input type="text" class="form-control defaultTheme" id="playerOneName" name="playerOneName" value="Player One">
-          </div>
-          <div id="playerOneGlobalScore" class=" ombre borderCurved"></div>
-          <div class="ombre borderCurved"> 
-            <p id="playerOne" class="borderCurved"></p>
-          </div>
-          <div id="playerOneCurrentScore" class="ombre borderCurved"></div>
-        </div>
+        </div> 
 
         <!-- Reserved place for Dice track  and buttons throw and keep-->
         <div class="diceTrack borderCurved col-6 col-md-6 order-2">
           <div class="col-12">
               <p id="dice">
-                <!-- <img> -->
               </p>
           </div>
           <div class="row">
@@ -86,23 +77,15 @@
 
         <!-- PLayer two description -->
         <div id="playerTwoId" class="playerTwo col-6 col-md-3 order-3 text-center">
-          <div class="form-group"> 
-            <!-- <input type="text" class="form-control defaultTheme" id="playerTwoName" name="playerTwoName" placeholder="Player Two"> -->
-            <input type="text" class="form-control defaultTheme" id="playerTwoName" name="playerTwoName" value="Player Two">
-          </div>
-          <div id="playerTwoGlobalScore" class="ombre borderCurved"></div>
-          <div class="ombre borderCurved"> 
-            <p id="playerTwo" class=" ombre borderCurved"></p>
-          </div>
-           <div id="playerTwoCurrentScore" class="ombre borderCurved"></div>
         </div>
+
       </section>
     </main>
     
     <!-- Modal  General Settings-->
     <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen-sm-down">
-        <div class="modal-content" id="settingModalContent">
+        <div class="modal-content defaultTheme" id="settingModalContent">
           <div class="modal-header">
             <h5 class="modal-title" id="settingModalLabel">Set up your favorite</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -110,21 +93,21 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="formSetting">
               <div class="row">
                 <div class="col">  
                   <div class="custom-control">   
-                    <input class='defaultTheme' type="number" id="diceType" name="diceType" min="6" max="12" value="6">
+                    <input class="defaultTheme" type="number" id="diceType" name="diceType" min="6" max="12" value="6">
                     <label for="diceType">Number of die's sides </label>
                   </div>
 
                   <div class="custom-control"> 
-                    <input class='defaultTheme' type="number" id="losingDiceFace" name="losingDiceFace" min="1" max="12" value="1">
+                    <input class="defaultTheme" type="number" id="losingDiceFace" name="losingDiceFace" min="1" max="12" value="1">
                     <label for="losingDiceFace">Losing number</label>
                   </div>
 
                   <div class="custom-control"> 
-                    <input class='defaultTheme' type="number" id="winningScore" name="winningScore" value="100">
+                    <input class="defaultTheme" type="number" id="winningScore" name="winningScore" value="100">
                     <label for="winningScore">Winning Score</label>
                   </div>
 
@@ -157,7 +140,7 @@
     <!-- Modal  Check Rules -->
     <div class="modal fade" id="checkRules" tabindex="-1" aria-labelledby="checkRulesLabel" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen-sm-down">
-        <div class="modal-content" id="checkRulesContent">
+        <div class="modal-content defaultTheme" id="checkRulesContent">
           <div class="modal-header">
             <h5 class="modal-title" id="checkRulesLabel">Game Rules</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -165,13 +148,13 @@
             </button>
           </div>
           <div class="modal-body">
-            <p class="checkRulesText">
+            <p id="pcheckrules" class="checkRulesText defaultTheme">
               The game enroles two players on one and only screen.
               Each player has a temporary score (ROUND) and a global score (GLOBAL).
               On player's round, the round score of the player is set to zero, then the player can roll the die as many time he wants.
               The result of round is added to ROUND score of the player.
               During his turn, the player can decide to :
-              <ul class="checkRulesText">
+              <ul id="id-ul" class="checkRulesText defaultTheme">
                 <li>
                   Click on HOLD button, so that his current round score is added to his GLOBAL score.
                   As a result, the second player take hand.
@@ -186,7 +169,29 @@
         </div>
       </div>
     </div>
-
+    <div id="alertNaN" class="d-none">
+      <p>
+        A least one parameter is not numeric, modifications will be not taken into account for that play.
+      </p>
+    </div>
+    <div id="alertCoherence" class="d-none">
+      <p>
+        The number of die's sides must be between 1 and 12, and the loosing side must be between 1 and the number of sides.
+        The winning score must be at least equal to 1.
+        Your indications, sum up below, seem not to respect these rules.
+        So, the default values 6, 1 and 100 will be maintained for that play.
+      </p>
+    </div>
+    <div id="alertSelecPlayers" class="d-none">
+      <p>
+        Two avatars must be selected before game starting. You can set a cutomized name to each player.
+      </p>
+    </div>
+    <div id="alertWin" class="d-none">
+      <p>
+        , you win !
+      </p>
+    </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

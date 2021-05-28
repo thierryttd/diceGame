@@ -18,7 +18,7 @@ let setSound=document.getElementById('setSound').checked;
 let defaultTheme=document.getElementById('defaultTheme').checked;
 let implicitWin = document.getElementById('implicitWin').checked;
 
-// array contain path to avatar images 
+// array contains path to avatar images 
 let arrayAvatar=[];
 
 let pathAvatarPrefix = "images/avatar-";
@@ -63,9 +63,7 @@ for (let i=0; i < 12; i++){
 let rollLogPlayerOne = [];
 let rollLogPlayerTwo = [];
 
-
-// let btnSettingModal = document.getElementById('btnSettingModal');
-// BUttons definition
+// Buttons definition
 let btnNewGame=document.getElementById('newGame');
 btnNewGame.addEventListener('click',newGameFct);
 
@@ -80,6 +78,10 @@ btnRoll.disabled = true;
 let btnHold=document.getElementById('hold');
 btnHold.addEventListener('click', holdFct);
 btnHold.disabled = true;
+
+// Create players descriptions
+createPlayer('playerOneId', 'div1', 'playerOneId', 'playerOneName', 'PlayerOne','playerOneGlobalScore','playerOneCurrentScore');
+createPlayer('playerTwoId', 'div2', 'playerTwoId', 'playerTwoName', 'PlayerTwo','playerTwoGlobalScore','playerTwoCurrentScore');
 
 // Inject avatars images in the list of choice, each of the image will have an id
 let avatarList = document.getElementById('avatarList');
@@ -108,14 +110,13 @@ for (let i=0; i < 10; i++){
     let idOne="avatarId-"+i;
     avatarClick.push(document.getElementById(idOne));
     avatarClick[i].addEventListener('click',function(){
-
         if ((avatarOneSelected !== i) && (avatarTwoSelected !== i)){
             if (playerOneActif){
                 avatarOneSelected=i;
-                var tt=document.getElementById('playerOne');
+                var tt = document.getElementById('div1');
             }else{
                 avatarTwoSelected=i;
-                var tt=document.getElementById('playerTwo');
+                var tt = document.getElementById('div2');
             }
 
             var imageAvatar = document.createElement('img');
@@ -143,72 +144,49 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
     setSound=document.getElementById('setSound').checked;
     defaultTheme=document.getElementById('defaultTheme').checked;
     implicitWin = document.getElementById('implicitWin').checked;
-    elmtBody = document.getElementById('body');
-    elmtMain = document.getElementById('main');
-    elmtSettingModal=document.getElementById('settingModalContent');
-    elmtRuleModal=document.getElementById('checkRulesContent');
 
     if (isNaN(diceType) || isNaN(losingDiceFace) || isNaN(winningScore)){
-        alert('Au moins un paramètre n"est pas numérique, vos modifications ne seront pas prises en ncompte pour cette partie.')
+        alert(document.getElementById('alertNaN').innerText);
         diceType = 6;
         losingDiceFace = 1;
         winningScore = 100;
     }
 
     if (diceType < 1 || diceType > 12  || losingDiceFace < 1 || losingDiceFace > diceType || winningScore < 1){
-        alert('Le nombre de faces du dé doit être compris entre 1 et 12, et la face perdante doit être comprise en 1 et le nombre de faces. '
-        + ' le score gagnant doit être supérieur ou égal à 1.'
-        + 'Vos indications ' + diceType + ' / ' + losingDiceFace + ' / ' + winningScore 
-        + ' ne semblent pas respecter ces contraintes. '
-        + 'Les valeurs par défaut 6, 1 et 100, seront donc maintenues pour cette partie.')
+        alert(document.getElementById('alertCoherence').innerText + diceType + ' / ' + losingDiceFace + ' / ' + winningScore );
         diceType = 6;
         losingDiceFace = 1;
         winningScore = 100;
     }
 
-    if (defaultTheme){
-        elmtBody.classList.remove('darkMode');
-        elmtBody.classList.add('defaultTheme');
-        elmtMain.classList.remove('darkMode');
-        elmtMain.classList.add('defaultTheme');
-        elmtSettingModal.classList.remove('darkMode');
-        elmtSettingModal.classList.add('defaultTheme');
-        elmtRuleModal.classList.remove('darkMode');
-        elmtRuleModal.classList.add('defaultTheme');
-        document.getElementById('playerOneName').classList.remove('darkMode');
-        document.getElementById('playerOneName').classList.add('defaultTheme');
-        document.getElementById('playerTwoName').classList.remove('darkMode');
-        document.getElementById('playerTwoName').classList.add('defaultTheme');
-        document.getElementById('diceType').classList.remove('darkMode');
-        document.getElementById('diceType').classList.add('defaultTheme');
-        document.getElementById('losingDiceFace').classList.remove('darkMode');
-        document.getElementById('losingDiceFace').classList.add('defaultTheme');
-        document.getElementById('winningScore').classList.remove('darkMode');
-        document.getElementById('winningScore').classList.add('defaultTheme');
-    }else{
-        elmtBody.classList.remove('defaultTheme');
-        elmtBody.classList.add('darkMode');
-        elmtMain.classList.remove('bg-light');
-        elmtMain.classList.add('darkMode');
-        elmtSettingModal.classList.remove('defaultTheme');
-        elmtSettingModal.classList.add('darkMode');
-        elmtRuleModal.classList.remove('defaultTheme');
-        elmtRuleModal.classList.add('darkMode');
-        document.getElementById('playerOneName').classList.remove('defaultTheme');
-        document.getElementById('playerOneName').classList.add('darkMode');
-        document.getElementById('playerTwoName').classList.remove('defaultTheme');
-        document.getElementById('playerTwoName').classList.add('darkMode');
-        document.getElementById('diceType').classList.remove('defaultTheme');
-        document.getElementById('diceType').classList.add('darkMode');
-        document.getElementById('losingDiceFace').classList.remove('defaultTheme');
-        document.getElementById('losingDiceFace').classList.add('darkMode');
-        document.getElementById('winningScore').classList.remove('defaultTheme');
-        document.getElementById('winningScore').classList.add('darkMode');
-    }
+    document.getElementById('diceType').value = diceType;
+    document.getElementById('losingDiceFace').value = losingDiceFace;
+    document.getElementById('winningScore').value = winningScore;
 
+    if (defaultTheme){
+        document.getElementById('body').classList.replace('darkMode', 'defaultTheme');
+        document.getElementById('main').classList.replace('darkMode', 'defaultTheme');
+        document.getElementById('settingModalContent').classList.replace('darkMode', 'defaultTheme');
+        document.getElementById('checkRulesContent').classList.replace('darkMode', 'defaultTheme');
+        document.getElementById('playerOneName').classList.replace('darkMode', 'defaultTheme');
+        document.getElementById('playerTwoName').classList.replace('darkMode', 'defaultTheme');
+        document.getElementById('diceType').classList.replace('darkMode', 'defaultTheme');
+        document.getElementById('losingDiceFace').classList.replace('darkMode', 'defaultTheme');
+        document.getElementById('winningScore').classList.replace('darkMode', 'defaultTheme');
+    }else{
+        document.getElementById('body').classList.replace('defaultTheme', 'darkMode');
+        document.getElementById('main').classList.replace('defaultTheme', 'darkMode');
+        document.getElementById('settingModalContent').classList.replace('defaultTheme', 'darkMode');
+        document.getElementById('checkRulesContent').classList.replace('defaultTheme', 'darkMode');
+        document.getElementById('playerOneName').classList.replace('defaultTheme', 'darkMode');
+        document.getElementById('playerTwoName').classList.replace('defaultTheme', 'darkMode');
+        document.getElementById('diceType').classList.replace('defaultTheme', 'darkMode');
+        document.getElementById('losingDiceFace').classList.replace('defaultTheme', 'darkMode');
+        document.getElementById('winningScore').classList.replace('defaultTheme', 'darkMode');
+    }
 })
 
-// function link to play button
+// function associated to play button
 // Initialization of scores, number of rolls, rolls log and force player one to be active
 // maybe during the previous run, player have been swap as a result, new swap to establish default players positions
 function newGameFct(){
@@ -227,16 +205,9 @@ function newGameFct(){
 
         positionPlayerTwo.classList.remove('order-1');
         positionPlayerTwo.classList.add('order-3');
-
-        // document.getElementById('rollLogPlayerOne').classList.remove('order-2');
-        // document.getElementById('rollLogPlayerOne').classList.add('order-1');
-
-        // document.getElementById('rollLogPlayerTwo').classList.remove('order-1');
-        // document.getElementById('rollLogPlayerTwo').classList.add('order-2');
     }
 
-
-    //maybe dice type has change (by modal setting) from the previous run, so that die dimension is apply
+    //maybe dice type has change (by modal setting) from the previous run, so that die dimension is applied
     arrayDiceFaces = arrayDiceDodecagone.slice (0, diceType);
 
     // the two players must choose an avatar before game starting
@@ -251,7 +222,7 @@ function newGameFct(){
         var tt=document.getElementById('dice');
         tt.innerHTML = '';
 
-        loosingDiceFace = 0;
+        // loosingDiceFace = 0;
         playerOneActif = Boolean(true);
         playerTwoActif = Boolean(false);
         playerOneGlobalScore = 0;
@@ -259,21 +230,18 @@ function newGameFct(){
         playerOneCurrentScore = 0;
         playerTwoCurrentScore = 0;
 
-        tt=document.getElementById('playerOneGlobalScore');
-        tt.innerText='Global Score ' + playerOneGlobalScore;
-        tt=document.getElementById('playerOneCurrentScore');
-        tt.innerText='Current Score ' + playerOneCurrentScore;
+        document.getElementById('playerOneGlobalScore').innerText = 'Global Score ' + playerOneGlobalScore;
+        document.getElementById('playerOneCurrentScore').innerText = 'Global Score ' + playerOneCurrentScore;
 
-        tt=document.getElementById('playerTwoGlobalScore');
-        tt.innerText='Global Score ' + playerTwoGlobalScore;
-        tt=document.getElementById('playerTwoCurrentScore');
-        tt.innerText='Current Score ' + playerTwoCurrentScore;
+        document.getElementById('playerTwoGlobalScore').innerText = 'Global Score ' + playerTwoGlobalScore;
+        document.getElementById('playerTwoCurrentScore').innerText = 'Global Score ' + playerTwoCurrentScore;
 
+        // List of avatars not visible during playing
         tt=document.getElementById('avatarId');
         tt.classList.add('d-none');
       
     }else{
-        alert('Two avatars must be selected, before game starting. You can set a cutomized name to each player.')
+        alert(document.getElementById('alertSelecPlayers').innerText);
     }
 }
 
@@ -305,16 +273,6 @@ function cancelGameFct(){
     btnSettingModal.disabled = false;
 
     // avatars images are visible again, so that players can choose an other one before the new game
-
-    // var tt=document.getElementById('avatarId');
-    // tt.classList.remove('d-none');
-    
-    // var tt=document.getElementById('dice');
-    // tt.innerHTML = '';
-
-    // document.getElementById('rollLogPlayerOne').innerHTML = '';
-    // document.getElementById('rollLogPlayerTwo').innerHTML = '';
-
     document.getElementById('avatarId').classList.remove('d-none');
 
     // clean up dice track and rolls log
@@ -324,7 +282,6 @@ function cancelGameFct(){
 }
 
 // Function assign to keep button
-// 
 function holdFct(){
 
     // to avoid activate hold button without roll first
@@ -358,19 +315,16 @@ function holdFct(){
         
         let para = document.getElementById('dice');
         if (playerOneActif) {
-            para.innerText = document.getElementById('playerOneName').value + ', vous avez gagné !';
+            para.innerText = document.getElementById('playerOneName').value + document.getElementById('playerOneName').innerText;
         }else{
-            para.innerText = document.getElementById('playerTwoName').value + ', vous avez gagné !';
+            para.innerText = document.getElementById('playerTwoName').value + document.getElementById('playerOneName').innerText;
         }
         
         btnRoll.disabled = true;
         btnNewGame.disabled = false;
-
-    // }else{
-    //     swapPlayerFct();
     }
     
-    // 
+    // hands changing after a player has click hold
     swapPlayerFct();
     playerOneActif =! playerOneActif;
     playerTwoActif =! playerTwoActif;
@@ -382,7 +336,8 @@ function rollFct(){
     // let the possibility to the player to keep his score
     btnHold.disabled = false;
 
-    // dice roll simulation with shuffle array containing die sides, choose the side to expose
+    // dice roll simulation with shuffle array containing die sides, choose the side to be exposed
+    //always [0] because array is shuffled
     shuffleArray(arrayDiceFaces);
     var imageDice = document.createElement('img');
     imageDice.src = arrayDiceFaces[0];
@@ -418,7 +373,7 @@ function rollFct(){
         tt.appendChild(elthisto);
 
         // For correct display on smaller screen, roll log list is limited to the constant logRollMax
-        // so in case of oveflow, the older roll is erased of the log
+        // so in case of overflow, the older roll is erased of the log
         if ( nbrRollPlayerOne > logRollMax){
             index = parseInt(nbrRollPlayerOne - logRollMax - 1);
             image = 'idLogPlayerOne-' + index
@@ -497,14 +452,12 @@ function rollFct(){
 
     // check if updated score is up to the winning score
     // in this case applause and display congratulation to the winner
-    // to proceed to evaluation, global score is considered, otherwise click hold button is required to
+    // to proceed to evaluation, global score is considered, (implicit / explicit victory) otherwise click hold button is required to
     // take into account the current score
     let test = 0;
     if (implicitWin){
-        // alert('cas implicitwin vrai');
         test = virtualWinningScore;
     }else{
-        // alert('cas implicitwin faux');
         test = score;
     }
     if (test >= winningScore){
@@ -559,6 +512,35 @@ function swapPlayerFct(){
             document.getElementById('rollLogPlayerTwo').classList.add('order-2');
         }
 }
+// shuffle the die
 function shuffleArray(inputArray){
     inputArray.sort(()=> Math.random() - 0.5);
+}
+
+function createPlayer(insert1, insert2, insert3, nom, numberid, globalScore, currentScore){
+    let insertPoint = document.getElementById(insert1);
+    let insertData = document.createElement('input');
+    insertData.type = 'text';
+    // insertData.className = 'form-control defaultTheme';
+    insertData.className = 'defaultTheme';
+    insertData.id = nom;
+    insertData.name = nom;
+    insertData.value = numberid;
+    insertPoint.appendChild(insertData);
+    
+    insertData = document.createElement('div');
+    insertData.id = globalScore;
+    insertData.className = 'ombre borderCurved';
+    insertPoint.appendChild(insertData);
+    
+    insertData = document.createElement('div');
+    insertData.id = insert2;
+    insertData.className = 'ombre borderCurved';
+    insertPoint.appendChild(insertData);
+   
+    insertPoint = document.getElementById(insert3);
+    insertData = document.createElement('div');
+    insertData.id = currentScore;
+    insertData.className = 'ombre borderCurved';
+    insertPoint.appendChild(insertData);
 }
