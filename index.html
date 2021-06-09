@@ -15,8 +15,8 @@
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   </head>
 
-  <body id="body" class="defaultTheme">
-    <main id="main" class="container borderCurved defaultTheme">
+  <body id="body">
+    <main id="main" class="container borderCurved">
 
       <header class="row">
         <div class="col-9 text-center">
@@ -50,11 +50,11 @@
       <section class="row mt-2">
         
         <!-- PLayer one description -->
-        <div id="playerOneId" class="m-2 ombre borderCurved col-5 col-md-3 order-1 text-center defaultTheme">
+        <div id="playerOneId" class="m-2 borderCurved col-5 col-md-3 order-1 text-center">
         </div> 
 
         <!-- Reserved place for Dice track  and buttons throw and keep -->
-        <div id="diceTrack" class="m-3 mt-4 diceTrack borderCurved col-5 col-md-3 order-2 d-none">
+        <div id="diceTrack" class="m-3 mt-4 borderCurved col-5 col-md-3 order-2 d-none">
           <!-- Where log of the die cast take place -->
           <div class="row"> 
             <div id="rollLogPlayer" class="col-12"></div>
@@ -75,7 +75,7 @@
         <div id="avatarId" class="mt-2 col-4 col-md-3 order-2 align-self-center"></div>
 
         <!-- PLayer two description -->
-        <div id="playerTwoId" class="m-2 ombre borderCurved col-5 col-md-3 order-3 text-center defaultTheme">
+        <div id="playerTwoId" class="m-2 borderCurved col-5 col-md-3 order-3 text-center">
         </div>
 
       </section>
@@ -85,7 +85,7 @@
     <!-- Modal  General Settings-->
     <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen-sm-down">
-        <div class="modal-content defaultTheme" id="settingModalContent">
+        <div class="modal-content" id="settingModalContent">
           <div class="modal-header">
             <h5 class="modal-title" id="settingModalLabel">Set up your favorite</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -97,17 +97,17 @@
               <div class="row">
                 <div class="col">  
                   <div class="custom-control">   
-                    <input class="defaultTheme" type="number" id="diceType" name="diceType" min="6" max="12" value="6">
+                    <input type="number" id="diceType" name="diceType" min="6" max="12" value="6">
                     <label for="diceType">Number of die's sides </label>
                   </div>
 
                   <div class="custom-control"> 
-                    <input class="defaultTheme" type="number" id="losingDiceFace" name="losingDiceFace" min="1" max="12" value="1">
+                    <input type="number" id="losingDiceFace" name="losingDiceFace" min="1" max="12" value="1">
                     <label for="losingDiceFace">Losing number</label>
                   </div>
 
                   <div class="custom-control"> 
-                    <input class="defaultTheme" type="number" id="winningScore" name="winningScore" value="100">
+                    <input type="number" id="winningScore" name="winningScore" value="100">
                     <label for="winningScore">Winning Score</label>
                   </div>
 
@@ -121,9 +121,25 @@
                     <label for="setSound" class="custom-control-label">Music</label>
                   </div>
 
-                  <div class="custom-control custom-switch">
+                  <!-- <div class="custom-control custom-switch">
                     <input type="checkbox" id="defaultTheme" name="defaultTheme" class="custom-control-input" checked>
                     <label for="defaultTheme" class="custom-control-label">Toggle Default / Dark Theme</label>
+                  </div> -->
+                  <p>Select a color theme:</p>
+                  <div>
+                    <input type="radio" id="blueGray50" name="colorTheme" value="blueGray50"
+                          checked>
+                    <label for="blueGray50">BlueGray50</label>
+                  </div>
+
+                  <div>
+                    <input type="radio" id="deepOrange50" name="colorTheme" value="deepOrange50">
+                    <label for="deepOrange50">DeepOrange50</label>
+                  </div>
+
+                  <div>
+                    <input type="radio" id="dark" name="colorTheme" value="dark">
+                    <label for="dark">Dark</label>
                   </div>
 
                 </div> 
@@ -140,7 +156,7 @@
     <!-- Modal  Check Rules -->
     <div class="modal fade" id="checkRules" tabindex="-1" aria-labelledby="checkRulesLabel" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen-sm-down">
-        <div class="modal-content defaultTheme" id="checkRulesContent">
+        <div class="modal-content" id="checkRulesContent">
           <div class="modal-header">
             <h5 class="modal-title" id="checkRulesLabel">Game Rules</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -148,13 +164,13 @@
             </button>
           </div>
           <div class="modal-body">
-            <p id="pcheckrules" class="checkRulesText defaultTheme">
+            <p id="pcheckrules" class="checkRulesText">
               The game enroles two players on one and only screen.
               Each player has a temporary score (ROUND) and a global score (GLOBAL).
               On player's round, the round score of the player is set to zero, then the player can roll the die as many time he wants.
               The result of round is added to ROUND score of the player.
               During his turn, the player can decide to :
-              <ul id="id-ul" class="checkRulesText defaultTheme">
+              <ul id="id-ul" class="checkRulesText">
                 <li>
                   Click on HOLD button, so that his current round score is added to his GLOBAL score.
                   As a result, the second player take hand.

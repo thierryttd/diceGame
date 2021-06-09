@@ -17,7 +17,8 @@ let diceType = parseInt(document.getElementById('diceType').value);
 let losingDiceFace = parseInt(document.getElementById('losingDiceFace').value);
 let winningScore = parseInt(document.getElementById('winningScore').value);
 let setSound=document.getElementById('setSound').checked;
-let defaultTheme=document.getElementById('defaultTheme').checked;
+// let selectedTheme=document.getElementById('blueGray50').checked;
+// alert('colorTheme ' + selectedTheme);
 let implicitWin = document.getElementById('implicitWin').checked;
 
 // no avatar choosen for any player
@@ -43,6 +44,16 @@ for (let i=0; i < nbrImgAvatar; i++){
     arrayAvatar.push([sourceAvatar,arrayAvatarName[i]]);
     
 };
+
+// color theme definition
+// const colorTheme = [['blueGray50','deepOrange50','dark'],
+//                     ['player','diceTrack','body'],
+//                     // ['bg','color','shadow'],
+
+const colorTheme =  [   [['#ECEFF1','#263238','(38,50,56,0.75)'],['#455A64','',''],['#B0BEC5','','']],
+                        [['#FFCCBC','#FB360C','(237,122,21,0.75)'],['#E64A19','',''],['#FFAB91','','']],
+                        [['#424242','#EEEEEE','(201,140,140,0.75)'],['#757575','',''],['#121212','#EEEEEE','']],
+                    ];
 
 // sort array to change order of avatars images on page load
 shuffleArray(arrayAvatar);
@@ -98,6 +109,12 @@ btnAvatarId.addEventListener('click', avatarIdFct);
 createPlayer('playerOneId', 'div1', 'playerOneName', 'playerOneGlobalScore', 'playerOneCurrentScore');
 createPlayer('playerTwoId', 'div2', 'playerTwoName', 'playerTwoGlobalScore', 'playerTwoCurrentScore');
 
+// Apply color theme on players
+// colorPlayer('playerOneId', 'div1', 'playerOneName', 'playerOneGlobalScore', 'playerOneCurrentScore');
+// colorPlayer('playerTwoId', 'div2', 'playerTwoName', 'playerTwoGlobalScore', 'playerTwoCurrentScore');
+
+applyColorTheme();
+
 // toggle player one, player two definition
 setPlayersFct();
 avatarIdFct();
@@ -112,7 +129,7 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
     losingDiceFace = parseInt(document.getElementById('losingDiceFace').value);
     winningScore = parseInt(document.getElementById('winningScore').value);
     setSound=document.getElementById('setSound').checked;
-    defaultTheme=document.getElementById('defaultTheme').checked;
+    // defaultTheme=document.getElementById('defaultTheme').checked;
     implicitWin = document.getElementById('implicitWin').checked;
 
     if (isNaN(diceType) || isNaN(losingDiceFace) || isNaN(winningScore)){
@@ -133,18 +150,7 @@ $('#settingModal').on('hidden.bs.modal', function (event) {
     document.getElementById('losingDiceFace').value = losingDiceFace;
     document.getElementById('winningScore').value = winningScore;
 
-    if (defaultTheme){
-        arrayTheme = document.querySelectorAll('.defaultTheme');
-        // alert('Nombre elements avec class= defaultTheme ' + arrayTheme.length);
-        for (const item of arrayTheme) {
-            item.classList.replace('defaultTheme', 'darkMode')
-        }
-    }else{
-        arrayTheme = document.querySelectorAll('.darkMode');
-        for (const item of arrayTheme) {
-            item.classList.replace('darkMode', 'defaultTheme')
-        }
-    }
+    applyColorTheme();
 })
 
 // function associated to play button
@@ -480,7 +486,7 @@ function rollFct(){
 }
 
 // function activated when changing hand
-// the active player and his roll log is always on the left (or on the top for smaller screen)
+// the active player is always on the left (or on the top for smaller screen)
 function swapPlayerFct(){
         if ( positionPlayerOne.classList.contains('order-1')) {
 
@@ -541,14 +547,7 @@ function avatarIdFct(){
 
     imageAvatar.id = "avatarId" + "-" + valeur;
     imageAvatar.src = arrayAvatar[i][0];
-  
-  
-    if (defaultTheme) {
-        imageAvatar.className = 'img-fluid';
-    }else{
-        imageAvatar.className = 'img-fluid darkMode';
-    }
-
+    imageAvatar.className = 'img-fluid';
     avatarId.innerHTML = '';
     avatarId.appendChild(imageAvatar);
 
@@ -573,11 +572,7 @@ function avatarIdFct(){
         var imageAvatar = document.createElement('img');
         imageAvatar.id = ('imgIdAvatar-' + i);
         imageAvatar.src = arrayAvatar[i][0];
-        if (defaultTheme) {
-            imageAvatar.className = 'img-fluid';
-        }else{
-            imageAvatar.className = 'img-fluid darkMode';
-        }
+        imageAvatar.className = 'img-fluid';
         tt.innerHTML='';
         tt.appendChild(imageAvatar);
         if (nom.value !== '') {
@@ -598,11 +593,12 @@ function avatarIdFct(){
 
 }
 
+
 function createPlayer(insert1, insert2, nom, globalScore, currentScore){
     let insertPoint = document.getElementById(insert1);
     let insertData = document.createElement('input');
     insertData.type = 'text';
-    insertData.className = 'mt-2 form-control text-wrap defaultTheme';
+    insertData.className = 'mt-2 form-control text-wrap';
     insertData.style.borderStyle = "none";
     insertData.style.textAlign = "center";
     insertData.style.fontSize = "1.3em";
@@ -614,17 +610,66 @@ function createPlayer(insert1, insert2, nom, globalScore, currentScore){
     
     insertData = document.createElement('div');
     insertData.id = globalScore;
-    insertData.className = 'ombre borderCurved defaultTheme';
+    insertData.className = 'borderCurved';
     insertPoint.appendChild(insertData);
     
     insertData = document.createElement('div');
     insertData.id = insert2;
-    insertData.className = 'defaultTheme';
     insertPoint.appendChild(insertData);
    
     insertPoint = document.getElementById(insert1);
     insertData = document.createElement('div');
     insertData.id = currentScore;
-    insertData.className = 'ombre borderCurved defaultTheme';
+    insertData.className = 'borderCurved';
     insertPoint.appendChild(insertData);
+}
+function colorPlayer(insert1, insert2, nom, globalScore, currentScore){
+
+    let insert1Style = document.getElementById(insert1);
+    insert1Style.style.boxShadow = '10px 10px 5px 0px rgba' + colorTheme[selectedTheme][0][2];
+    insert1Style.style.backgroundColor = colorTheme[selectedTheme][0][0];
+    insert1Style.style.color = colorTheme [selectedTheme][0][1];
+
+    insertNomStyle = document.getElementById(nom);
+    insertNomStyle.style.backgroundColor = colorTheme[selectedTheme][0][0];
+    insertNomStyle.style.color = colorTheme [selectedTheme][0][1];
+   
+    let insert2Style = document.getElementById(insert2);
+    // insert2Style.style.boxShadow = '10px 10px 5px 0px rgba' + colorTheme[selectedTheme][0][2];
+    insert2Style.style.backgroundColor = colorTheme[selectedTheme][0][0];
+    insert2Style.style.color = colorTheme [selectedTheme][0][1];
+      
+    insertGlobalScoreStyle = document.getElementById(globalScore);
+    insertGlobalScoreStyle.style.boxShadow = '10px 10px 5px 0px rgba' + colorTheme[selectedTheme][0][2];
+    insertGlobalScoreStyle.style.backgroundColor = colorTheme[selectedTheme][0][0];
+    insertGlobalScoreStyle.style.color = colorTheme [selectedTheme][0][1];
+
+    insertCurrentScoreStyle = document.getElementById(currentScore);
+    insertCurrentScoreStyle.style.boxShadow = '10px 10px 5px 0px rgba' + colorTheme[selectedTheme][0][2];
+    insertCurrentScoreStyle.style.backgroundColor = colorTheme[selectedTheme][0][0];
+    insertCurrentScoreStyle.style.color = colorTheme [selectedTheme][0][1];
+}
+
+function applyColorTheme(){
+    if (document.getElementById('blueGray50').checked){
+        selectedTheme = 0;
+    }else{
+        if (document.getElementById('deepOrange50').checked){
+            selectedTheme = 1;
+    }else{
+        if (document.getElementById('dark').checked){
+            selectedTheme = 2;
+        }
+    }}
+
+    document.getElementById('body').style.backgroundColor = colorTheme[selectedTheme][2][0];
+    document.getElementById('diceTrack').style.backgroundColor = colorTheme[selectedTheme][1][0];
+    
+    document.getElementById('settingModalContent').style.backgroundColor = colorTheme[selectedTheme][2][0];
+    document.getElementById('settingModalContent').style.color = colorTheme[selectedTheme][2][1];
+    document.getElementById('checkRulesContent').style.backgroundColor = colorTheme[selectedTheme][2][0];
+    document.getElementById('checkRulesContent').style.color = colorTheme[selectedTheme][2][1];
+
+    colorPlayer('playerOneId', 'div1', 'playerOneName', 'playerOneGlobalScore', 'playerOneCurrentScore');
+    colorPlayer('playerTwoId', 'div2', 'playerTwoName', 'playerTwoGlobalScore', 'playerTwoCurrentScore');
 }
