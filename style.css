@@ -5,11 +5,11 @@
 
 body{
     font-family:Lato;
+    background-color: #B0BEC5;
 }
 
 h1{
     font-size: 1.5em;
-    /* color: blue; */
 }
 
 .checkRulesText{
@@ -17,44 +17,44 @@ h1{
 }
 
 #buttonBar{
-    height: 10vh;
+    background-color: #455A64;
 }
 
-#avatarList {
-    height:10vh;
-    overflow:auto;
-    padding: 0.3vw;
-}
-
-#playerOne, #playerTwo{
-    background-color: #0b6c49;
+#playerOneId, #playerTwoId{
+    background-color: #ECEFF1;
 }
 
 #playerOneGlobalScore, #playerTwoGlobalScore{
-    background-color: red;
     font-size: 1.3em;
     margin-top: .5vw;
     margin-bottom: .5vw;
+    background-color: "#ECEFF1";
+    color: "#263238";
 }
 
 #playerOneCurrentScore, #playerTwoCurrentScore{
-    background-color: #0b6c49;
     font-size: 1.3em;
     margin-top: .5vw;
     margin-bottom: .5vw;
+    background-color: "#ECEFF1";
+    color: "#263238";
 }
 
 #dice{
-    height: 336px;
     font-size: 1.5em;
     color: grey;
 }
 
 .diceTrack{
-    /* background-image: url("images/diceTrack.png");
-    background-repeat: no-repeat; */
-    background-color:#0b6c49;
-    height: 420px;
+    background-color: #455A64;
+}
+
+.playerMove{
+    animation: .15s playerMove;
+}
+
+.jump{
+    animation: .1s jump infinite alternate;
 }
 
 .diceRoll{
@@ -94,22 +94,42 @@ h1{
     }
 }
 
+@keyframes jump {
+    0% {
+        transform: translateX(0px);
+    }
+
+    100% {
+        transform: translatey(-20px);
+    }
+}
+
+
+@keyframes playerMove {
+    0% {
+        transform: translateX(0px);
+    }
+   
+    100% {
+        transform: translatey(200px);
+    }
+}
 
 @keyframes roll {
     0% {
         transform: translateX(0px);
     }
     25% {
-        transform: translateX(50px) translateY(336px) rotate(360deg);
+        transform: translateX(50px) translateY(700px) rotate(360deg);
      }
     50% {
-        transform: translateX(300px) translateY(200px) rotate(360deg);
+        transform: translateX(300px) translateY(200px) rotate(180deg);
      }
     75% {
         transform: translateX(250px) translateY(15px) rotate(360deg);
     }
     100% {
-        transform: translateX(0px) translateY(0px) rotate(360deg);
+        transform: translateX(0px) translateY(0px) rotate(180deg);
     }
 }
 
@@ -118,7 +138,7 @@ h1{
         transform: translateX(0px);
     }
     25% {
-        transform: translateX(50px) translateY(336px) rotate(360deg);
+        transform: translateX(50px) translateY(275px) rotate(360deg);
      }
     50% {
         transform: translateX(150px) translateY(200px) rotate(360deg);
@@ -136,13 +156,13 @@ h1{
         transform: translateX(0px);
     }
     25% {
-        transform: translateX(40px) translateY(336px) rotate(360deg);
+        transform: translateX(40px) translateY(200px) rotate(180deg);
      }
     50% {
-        transform: translateX(80px) translateY(200px) rotate(360deg);
+        transform: translateX(70px) translateY(200px) rotate(360deg);
      }
     75% {
-        transform: translateX(120px) translateY(15px) rotate(360deg);
+        transform: translateX(90px) translateY(15px) rotate(180deg);
     }
     100% {
         transform: translateX(0px) translateY(0px) rotate(360deg);
@@ -150,9 +170,9 @@ h1{
 }
 
 .ombre{
-    box-shadow: 10px 10px 52px 0px rgba(115,164,232,0.89);
-    -webkit-box-shadow: 10px 10px 52px 0px rgba(115,164,232,0.89);
-    -moz-box-shadow: 10px 10px 52px 0px rgba(115,164,232,0.89);     
+    box-shadow: 10px 10px 5px 0px rgba(38,50,56,0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(38,50,56,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(38,50,56,0.75);   
 }
 
 .borderCurved{

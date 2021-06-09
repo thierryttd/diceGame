@@ -18,16 +18,16 @@
   <body id="body" class="defaultTheme">
     <main id="main" class="container borderCurved defaultTheme">
 
-      <header class="row mt-2">
-        <div class="col-12">
+      <header class="row">
+        <div class="col-9 text-center">
           <img id="spinDice" src="images/diceFace-06.png" class="float-left" width="30" height="30">
           <h1>Play the game : the crazy dice</h1>
         </div>
       </header>
 
       <!-- Buttons bar to general game managing-->
-      <section id="buttonBar" class="row mt-2 borderCurved">
-        <div class="col-12 text-center">
+      <section class="row p-2 d-flex align-items-center borderCurved">
+        <div class="col-9 text-center">
           <button id="btnSettingModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingModal">
             Setting
           </button>
@@ -40,46 +40,46 @@
           <button id="cancelGame" class="btn btn-primary">
             Cancel
           </button>
+          <button id="setPlayers" class="btn btn-primary">
+            Click me to define players
+          </button>
         </div>
-      </section>
-
-      <!-- Where log of the die cast take place-->
-      <section class=" row"> 
-        <div id="rollLogPlayerOne" class="col-6 order-1"></div>
-        <div id="rollLogPlayerTwo" class="col-6 order-2" ></div>
-      </section>
-
-      <!-- Where list of avatars images take place -->
-      <section class="row mt-2"> 
-        <div id="avatarId" class="avatar col-7 col-md-12">
-          <div id="avatarList" class="d-flex justify-content-center"></div>
-        </div>
+        <!-- <div class="col-1"></div> -->
       </section>
 
       <section class="row mt-2">
+        
         <!-- PLayer one description -->
-        <div id="playerOneId" class="playerOne col-6 col-md-3 order-1 text-center">
+        <div id="playerOneId" class="m-2 ombre borderCurved col-5 col-md-3 order-1 text-center defaultTheme">
         </div> 
 
-        <!-- Reserved place for Dice track  and buttons throw and keep-->
-        <div class="diceTrack borderCurved col-6 col-md-6 order-2">
-          <div class="col-12">
-              <p id="dice">
-              </p>
+        <!-- Reserved place for Dice track  and buttons throw and keep -->
+        <div id="diceTrack" class="m-3 mt-4 diceTrack borderCurved col-5 col-md-3 order-2 d-none">
+          <!-- Where log of the die cast take place -->
+          <div class="row"> 
+            <div id="rollLogPlayer" class="col-12"></div>
           </div>
-          <div class="row">
-            <div class="col text-center">
-              <button id="roll" class="btn btn-primary">Throw</button>
-              <button id="hold" class="btn btn-primary">Keep</button>
+          <div class="row align-items-end">
+            <div class="col-12 text-center">
+              <button id="roll" class="btn btn-primary btn-sm m-2">Throw</button>
+              <button id="hold" class="btn btn-primary btn-sm m-2">Keep</button>
             </div>
           </div>
+            <div class="row" id="dice">
+              <div class="col-12">
+              </div>
+          </div>
+
         </div>
 
+        <div id="avatarId" class="mt-2 col-4 col-md-3 order-2 align-self-center"></div>
+
         <!-- PLayer two description -->
-        <div id="playerTwoId" class="playerTwo col-6 col-md-3 order-3 text-center">
+        <div id="playerTwoId" class="m-2 ombre borderCurved col-5 col-md-3 order-3 text-center defaultTheme">
         </div>
 
       </section>
+
     </main>
     
     <!-- Modal  General Settings-->
@@ -171,7 +171,7 @@
     </div>
     <div id="alertNaN" class="d-none">
       <p>
-        A least one parameter is not numeric, modifications will be not taken into account for that play.
+        At least one parameter is not numeric, modifications will be not taken into account for that play.
       </p>
     </div>
     <div id="alertCoherence" class="d-none">
