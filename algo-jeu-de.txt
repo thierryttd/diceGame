@@ -1,0 +1,79 @@
+soit sc1 le score courant du joueur 1
+soit sg1 le score global du joueur 1
+soit sc2 le score courant du joueur 2
+soit sg2 le score global du joueur 2
+soit perdu la valeur perdante du dé
+soit face le résultat du jet de dé
+soit gagnant le score gagnant
+soit sc le score courant du joueur actif
+soit sg le score global du joueur actif
+soit victoire le type de victoire
+soit mode le type alternance
+Initialiser sc1, sc2, sg1, sg2 à zéro
+Initialiser gagnant à 100
+Initialiser perdu à 1
+initialiser victoire ='implicite'
+initialiser mode = 'non'
+soit tableau les valeurs des faces du dé
+Le joueur actif est le joueur 1
+
+Tant que non fin de partie faire
+
+	si joueur 1 est actif 
+		alors 	sc = sc1
+				sg = sg1
+		sinon
+				sc = sc2 
+			sg = sg2
+	fin si 
+
+	mélanger le tableau aléatoirement
+
+	affecter face = élément indice 0 de tableau
+
+	si face = perdu
+		alors sc = 0
+			mode ='oui'
+			
+		sinon calculer sc = sc + face
+		si consigner score demandé
+				alors   calculer sg = sg + sc
+					calculer sc = 0
+					mode = 'oui'      	
+			fin si
+			calculer tempo = sc + sg
+			si victoire = 'implicite'
+			alors   calculer r = tempo + sc			
+				si r >= gagnant
+					alors fin de partie
+				fin si	
+			sinon
+				si sg > gagnant
+					alors fin de partie
+				fin si
+			fin si
+	fin si
+
+	appeler fonction alterner (mode)
+fin tant que
+
+fonction alterner (mode)
+	si joueur1 est actif
+	alors   sc1 = sc
+		sg1 = sg
+		si mode = 'oui' alors
+			joueur1 est passif
+			joueur2 est actif
+		fin si
+
+	sinon   sc2 = sc
+		sg2 = sg
+		si mode = 'oui' alors
+			joueur1 est actif
+			joueur2 est passif
+		fin si
+	fin si
+fin fonction
+
+	
+	

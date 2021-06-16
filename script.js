@@ -17,8 +17,6 @@ let diceType = parseInt(document.getElementById('diceType').value);
 let losingDiceFace = parseInt(document.getElementById('losingDiceFace').value);
 let winningScore = parseInt(document.getElementById('winningScore').value);
 let setSound=document.getElementById('setSound').checked;
-// let selectedTheme=document.getElementById('blueGray50').checked;
-// alert('colorTheme ' + selectedTheme);
 let implicitWin = document.getElementById('implicitWin').checked;
 
 // no avatar choosen for any player
@@ -109,10 +107,7 @@ btnAvatarId.addEventListener('click', avatarIdFct);
 createPlayer('playerOneId', 'div1', 'playerOneName', 'playerOneGlobalScore', 'playerOneCurrentScore');
 createPlayer('playerTwoId', 'div2', 'playerTwoName', 'playerTwoGlobalScore', 'playerTwoCurrentScore');
 
-// Apply color theme on players
-// colorPlayer('playerOneId', 'div1', 'playerOneName', 'playerOneGlobalScore', 'playerOneCurrentScore');
-// colorPlayer('playerTwoId', 'div2', 'playerTwoName', 'playerTwoGlobalScore', 'playerTwoCurrentScore');
-
+// Apply selected color theme 
 applyColorTheme();
 
 // toggle player one, player two definition
@@ -195,7 +190,6 @@ function newGameFct(){
         btnNewGame.disabled = true;
         btnCancelGame.disabled = false;
         btnRoll.disabled = false;
-        // btnSettingModal.disabled = true;
         document.getElementById('playerOneName').disabled = true;
         document.getElementById('playerTwoName').disabled = true;
 
@@ -225,7 +219,7 @@ function newGameFct(){
     }
 
     if ( document.getElementById('playerOneName').value == document.getElementById('playerTwoName').value){
-        alert('It would be better if each player get his own different name.')
+        alert(document.getElementById('alertPlayersNames').innerText)
     }
 }
 
@@ -240,8 +234,12 @@ function cancelGameFct(){
     document.getElementById('playerTwoName').value = '';
     document.getElementById('playerOneName').value = '';
     document.getElementById('playerOneName').disabled = false;
-    document.getElementById('playerTwoName').disabled = false;
+    document.getElementById('playerTwoName').disabled = true;
     document.getElementById('setPlayers').disabled = false;
+    document.getElementById('playerOneCurrentScore').innerText = 'Current score 0';
+    document.getElementById('playerTwoCurrentScore').innerText = 'Current score 0'
+    document.getElementById('playerTwoGlobalScore').innerText = 'Global score 0'
+    document.getElementById('playerOneGlobalScore').innerText = 'Global score 0'
 
     btnRoll.disabled = true;
     btnHold.disabled = true;
@@ -301,7 +299,6 @@ function holdFct(){
         tt.innerText='Global Score ' + playerOneGlobalScore;
         tt=document.getElementById('playerOneCurrentScore');
         tt.innerText='Current score ' + playerOneCurrentScore;
-        // document.getElementById('playerTwoId').classList.add('playerMove');
     }else{
         playerTwoGlobalScore += playerTwoCurrentScore;
         playerTwoCurrentScore = 0;
@@ -539,8 +536,6 @@ function avatarIdFct(){
 
     let  i = indexAvatar;
 
-    let avatarList = document.getElementById('avatarId');
-    
     var imageAvatar = document.createElement('img');
     indexOfFirst = arrayAvatar[i][0].indexOf('-');
     let valeur = arrayAvatar[i][0].substr(indexOfFirst + 1 ,2);
@@ -635,7 +630,6 @@ function colorPlayer(insert1, insert2, nom, globalScore, currentScore){
     insertNomStyle.style.color = colorTheme [selectedTheme][0][1];
    
     let insert2Style = document.getElementById(insert2);
-    // insert2Style.style.boxShadow = '10px 10px 5px 0px rgba' + colorTheme[selectedTheme][0][2];
     insert2Style.style.backgroundColor = colorTheme[selectedTheme][0][0];
     insert2Style.style.color = colorTheme [selectedTheme][0][1];
       
